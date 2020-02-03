@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/filters")
 public class FilterController {
 
     @Autowired
@@ -37,12 +37,17 @@ public class FilterController {
 //        return filter;
 //    }
 
-    @GetMapping("/findNeighbor/filter/address")
-    public List<User> filterByAddress(String username){
+    @GetMapping("/byAddress")
+    public List<User> filterByAddress(@RequestParam(value="username") String username){
         Optional<User> optional = userDAO.findByUsername(username);
         User user = optional.isPresent() ? optional.get() : new User();
+        System.out.println("I am here " + user.getUsername() );
         Address address = addressDAO.findByUser(user);
-        List<User> users = userDAO.filterAddress("Ukraine", "Lviv", "Halytskiy", "solomiyka");
+        List<User> users = userDAO.filterAddress("Ukraine", "Lviv", "Halytskiy", user);
+        for(int i = 0; i < users.size(); i++){
+            User user1 = users.get(i);
+            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
+        }
         return users;
     }
 

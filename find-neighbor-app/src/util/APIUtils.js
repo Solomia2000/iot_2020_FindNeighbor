@@ -105,7 +105,7 @@ export function checkEmailAvailability(email) {
 
 export function filterByAddress(username) {
     return request({
-        url: API_BASE_URL + "/findNeighbor/filter/address/?username=" + username,
+        url: API_BASE_URL + "/filters/byAddress/?username=" + username,
         method: 'GET'
     });
 }
