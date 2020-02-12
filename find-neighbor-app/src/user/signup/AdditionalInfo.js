@@ -243,11 +243,11 @@ class AdditionalInfo extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="false"
-                                    checked={this.state.sex === "false"}
+                                    value="man"
+                                    checked={this.state.sex === "man"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Woman
+                                Man
                             </label>
                         </li>
 
@@ -255,11 +255,11 @@ class AdditionalInfo extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="true"
-                                    checked={this.state.sex === "true"}
+                                    value="woman"
+                                    checked={this.state.sex === "woman"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Man
+                                Woman
                             </label>
                         </li>
 

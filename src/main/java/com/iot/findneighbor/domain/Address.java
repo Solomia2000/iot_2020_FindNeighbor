@@ -22,7 +22,7 @@ public class Address {
     private String area;
 
     @OneToOne
-    @JoinColumn(referencedColumnName = "username")
+    @JoinColumn(referencedColumnName = "id")
     private User user;
 
     private Address(){}

@@ -49,7 +49,7 @@ public class AuthController {
     @Autowired
     AdditionalInfoDAO additionalInfoDAO;
     @Autowired
-    FiltersDAO filtersDAO;
+    PreferencesDAO filtersDAO;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -102,6 +102,7 @@ public class AuthController {
 
     @PostMapping("signup/{username}/additionalInfo")
     public ResponseEntity<?> registerUserAdditionalInfo(@Valid @RequestBody AdditionalInfo additionalInfoRequest, @PathVariable String username) {
+        System.out.println(additionalInfoRequest.getUser());
         Optional<User> optional = userDAO.findByUsername(username);
         User user = optional.isPresent() ? optional.get() : new User();
         additionalInfoRequest.setUser(user);
@@ -116,11 +117,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup/{username}/filters")
-    public ResponseEntity<?> registerUserAddress(@Valid @RequestBody Filters filtersRequest, @PathVariable String username) {
+    public ResponseEntity<?> registerUserAddress(@Valid @RequestBody Preferences filtersRequest, @PathVariable String username) {
         Optional<User> optional = userDAO.findByUsername(username);
         User user = optional.isPresent() ? optional.get() : new User();
         filtersRequest.setUser(user);
-        Filters filter = filtersDAO.save(filtersRequest);
+        Preferences filter = filtersDAO.save(filtersRequest);
         User userToGetUsername = filter.getUser();
         String userId = userToGetUsername.getUsername();
         URI location = ServletUriComponentsBuilder

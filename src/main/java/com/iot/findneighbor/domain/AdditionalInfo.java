@@ -21,14 +21,13 @@ public class AdditionalInfo {
     private boolean pets;
     private boolean badHabits;
     private boolean kindOfActivity;
-    private boolean sex;
+    private String sex;
     private String maritalStatus;
     private int age;
     private boolean haveJobOrJobless;
     private String moreAboutUser;
 
     @OneToOne
-    @JoinColumn(referencedColumnName = "username")
-    //@MapsId
+    @JoinColumn(referencedColumnName = "id")
     private User user;
 }

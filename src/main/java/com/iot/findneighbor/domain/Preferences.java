@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "filters")
-public class Filters {
+public class Preferences {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -21,6 +21,6 @@ public class Filters {
     private int startPrice;
     private int endPrice;
     @OneToOne
-    @JoinColumn(referencedColumnName = "username")
+    @JoinColumn(referencedColumnName = "id")
     private User user;
 }
