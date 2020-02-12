@@ -17,11 +17,7 @@ const request = (options) => {
     options = Object.assign({}, defaults, options);
 
     return fetch(options.url, options)
-        // .then(function(response) {
-        //     if (response.status === 404) {
-        //         return 'Hello'
-        //     }
-        // })
+
         .then(response =>
             response.json().then(json => {
                 if (!response.ok) {
@@ -108,12 +104,13 @@ export function checkEmailAvailability(email) {
 }
 
 
-export function filterUserListByAddress(username) {
-    return request({
-        url: API_BASE_URL + "/filters/byAddress/?username=" + username,
-        method: 'GET'
-    });
-}
+ export function filterUserListByAddress(username)
+{
+     return request({
+         url: API_BASE_URL + "/filters/byAddress/?username=" + username,
+         method: 'GET'
+     });
+ }
 
 export function getUserByUsername(username) {
     return request({

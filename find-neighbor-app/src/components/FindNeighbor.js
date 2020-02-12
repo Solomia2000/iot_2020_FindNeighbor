@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {checkEmailAvailability, filterUserListByAddress} from "../util/APIUtils";
 import {Button, Form, notification} from "antd";
+import {API_BASE_URL} from "../constants";
 
 class FindNeighbor extends Component {
     constructor(props) {
@@ -26,31 +27,15 @@ class FindNeighbor extends Component {
 
         console.log(this.state.usernameInfo)
 
-        // filterUserListByAddress(this.state.usernameInfo.username)
-        //     .then(response => {
-        //         if(response) {
-        //
-        //              console.log("Ooo yes");
-        //
-        //         } else {
-        //         }
-        //     });
-        console.log(this.state.usernameInfo)
-        filterUserListByAddress('solomiyka')
+        filterUserListByAddress(this.state.usernameInfo.username)
             .then(response => {
-                // console.log(this.state.usernameInfo.username)
-                this.setState({
-                        peoplesWhoFitCriteria: response
-                    }
-                 );
-                // const parsedResponse = JSON.parse(response);
-                // console.log(parsedResponse);
-            }).catch(error => {
-            notification.error({
-                message: 'Find Neighbor App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
+                if(response) {
+
+                     console.log("Ooo yes");
+
+                } else {
+                }
             });
-        });
     }
 
 

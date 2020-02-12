@@ -5,7 +5,6 @@ import com.iot.findneighbor.DAO.FiltersDAO;
 import com.iot.findneighbor.DAO.UserDAO;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
-import com.iot.findneighbor.service.FiltersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +24,7 @@ public class FilterController {
     @Autowired
     UserDAO userDAO;
 
-    @Autowired
-    FiltersService filtersService;
+
 
     @Autowired
     AddressDAO addressDAO;
