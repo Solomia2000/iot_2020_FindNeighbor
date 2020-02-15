@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api/filters")
+@RequestMapping("/api")
 public class FilterController {
 
     @Autowired
@@ -28,18 +28,26 @@ public class FilterController {
     AddressDAO addressDAO;
 
 
-//    @GetMapping("/byAddress")
-//    public List<User> filterByAddress(@RequestParam(value="username") String username){
-//        Optional<User> optional = userDAO.findByUsername(username);
-//        User user = optional.isPresent() ? optional.get() : new User();
-//        System.out.println("I am here " + user.getUsername() );
-//        Address address = addressDAO.findByUser(user);
-//        List<User> users = userDAO.filterAddress("Ukraine", "Lviv", "Halytskiy", user);
-//        for(int i = 0; i < users.size(); i++){
-//            User user1 = users.get(i);
-//            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
-//        }
-//        return users;
-//    }
+    @GetMapping( "/filters/byAddress")
+    public User filterByAddress(@RequestParam String username){
+        Optional<User> optional = userDAO.findByUsername(username);
+        User user = optional.isPresent() ? optional.get() : new User();
+        System.out.println("I am here " + user.getUsername() );
+        Address address = addressDAO.findByUser(user);
+        List<User> users = userDAO.filterArea("Ukraine", "Lviv", "Halytskiy", user);
+        Optional<User> userIvanka = userDAO.findByUsername("tarasuk");
+        User userIv = userIvanka.isPresent() ? userIvanka.get() : new User();
+        users.add(userIv);
+        if (users.size()==0){
+            System.out.println("NUll");
+        }
+        for(int i = 0; i < users.size(); i++){
+            User user1 = users.get(i);
+            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
+        }
+
+        return userIv;
+    }
+
 
 }

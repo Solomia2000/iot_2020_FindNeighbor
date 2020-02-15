@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {checkEmailAvailability, filterUserListByAddress} from "../util/APIUtils";
 import {Button, Form, notification} from "antd";
 import {API_BASE_URL} from "../constants";
@@ -27,7 +27,7 @@ class FindNeighbor extends Component {
 
         console.log(this.state.usernameInfo)
 
-        filterUserListByAddress(this.state.usernameInfo.username)
+        filterUserListByAddress("solomiyka")
             .then(response => {
                 if(response) {
 
@@ -36,6 +36,12 @@ class FindNeighbor extends Component {
                 } else {
                 }
             });
+
+       // // filterUserListByAddress(this.state.usernameInfo.username)
+       //  filterUserListByAddress(this.state.usernameInfo.username)
+       //      .then(response => response.data)
+       //      .then(data => console.log("data", data))
+       //      .catch(e => console.warn(`ERROR::: ${e.message}`))
     }
 
 

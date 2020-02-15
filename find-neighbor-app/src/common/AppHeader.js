@@ -15,12 +15,10 @@ class AppHeader extends Component {
         this.handleMenuClick = this.handleMenuClick.bind(this);
     }
 
-    handleMenuClick({ key }) {
-        if(key === "logout") {
-            this.props.onLogout();
-        }
-    }
 
+    handleMenuClick({ key }) {
+        if (key === "logout") this.props.onLogout();
+    }
 
 
     render() {

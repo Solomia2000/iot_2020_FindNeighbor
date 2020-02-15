@@ -105,19 +105,15 @@ export function checkEmailAvailability(email) {
 
 
  export function filterUserListByAddress(username)
+
 {
+    console.log('xxxx', username)
      return request({
-         url: API_BASE_URL + "/filters/byAddress/?username=" + username,
+         url: API_BASE_URL + "/filters/byAddress?username=" + username,
          method: 'GET'
      });
  }
 
-export function getUserByUsername(username) {
-    return request({
-        url: API_BASE_URL + "/getUser/?username=" + username,
-        method: 'GET'
-    });
-}
 
 export function checkIfUserFilterExist(username) {
     return request({
