@@ -31,7 +31,7 @@ class FindNeighbor extends Component {
             .then(response => {
                 if(response) {
 
-                     console.log("Ooo yes");
+                     console.log("Ooo yes",response );
 
                 } else {
                 }

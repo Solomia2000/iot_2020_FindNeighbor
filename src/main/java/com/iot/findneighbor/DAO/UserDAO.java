@@ -32,5 +32,7 @@ public interface UserDAO extends JpaRepository<User, Long> {
             "?1))")
     List<User> filterSex(User user);
 
+    @Query("SELECT a.user from AdditionalInfo a where a.age between ?1 AND ?2")
+    List<User> filterAge(int startAge, int endAge);
 
 }

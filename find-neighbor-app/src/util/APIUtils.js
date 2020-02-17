@@ -17,15 +17,20 @@ const request = (options) => {
     options = Object.assign({}, defaults, options);
 
     return fetch(options.url, options)
-
-        .then(response =>
-            response.json().then(json => {
-                if (!response.ok) {
-                    return Promise.reject(json);
-                }
-                return json;
-            })
-        );
+        .then(res => {
+            console.log('x', res)
+            return res;
+        })
+        .then(res => res.json())
+        .catch(err => Promise.reject(err))
+        // .then(response =>
+        //     response.json().then(json => {
+        //         if (!response.ok) {
+        //             return Promise.reject(json);
+        //         }
+        //         return json;
+        //     })
+        // );
 };
 
 
@@ -104,12 +109,9 @@ export function checkEmailAvailability(email) {
 }
 
 
- export function filterUserListByAddress(username)
-
-{
-    console.log('xxxx', username)
+ export function filterUserListByAddress(username) {
      return request({
-         url: API_BASE_URL + "/filters/byAddress?username=" + username,
+         url: API_BASE_URL + "/filters/address?username=" + username,
          method: 'GET'
      });
  }

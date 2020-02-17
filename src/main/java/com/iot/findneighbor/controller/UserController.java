@@ -1,6 +1,8 @@
 package com.iot.findneighbor.controller;
 
+import com.iot.findneighbor.DAO.AddressDAO;
 import com.iot.findneighbor.DAO.UserDAO;
+import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
 import com.iot.findneighbor.request.UserIdentityAvailability;
 import com.iot.findneighbor.request.UserSummary;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    AddressDAO addressDAO;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -54,4 +60,25 @@ public class UserController {
         User user = optionalUser.isPresent() ? optionalUser.get() : new User();
         return user;
     }
+
+//    @GetMapping("/address")
+//    public User Test(@RequestParam(value = "username") String username){
+//        Optional<User> optional = userDAO.findByUsername(username);
+//        User user = optional.isPresent() ? optional.get() : new User();
+//        System.out.println("I am here " + user.getUsername() );
+//        Address address = addressDAO.findByUser(user);
+//        List<User> users = userDAO.filterArea("Ukraine", "Lviv", "Halytskiy", user);
+//            Optional<User> userIvanka = userDAO.findByUsername("tarasuk");
+//            User userIv = userIvanka.isPresent() ? userIvanka.get() : new User();
+//        users.add(userIv);
+//        if (users.size()==0){
+//            System.out.println("NUll");
+//        }
+//        for(int i = 0; i < users.size(); i++){
+//            User user1 = users.get(i);
+//            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
+//        }
+//
+//            return  userIv;
+//        }
 }
