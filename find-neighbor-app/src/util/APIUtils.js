@@ -109,11 +109,20 @@ export function checkEmailAvailability(email) {
 }
 
 
- export function filterUserListByAddress(username) {
+ // export function filterUserListByAddress(username) {
+ //     return request({
+ //         url: API_BASE_URL + "/filters/address?username=" + username,
+ //         method: 'GET'
+ //     });
+ // }
+
+ export function userFiltration(id, fullAddress, age, sex) {
      return request({
-         url: API_BASE_URL + "/filters/address?username=" + username,
+         url: API_BASE_URL + "/filters/user/search?id=" + id + "&fullAddress=" + fullAddress +
+         "&age=" + age + "&sex=" + sex,
          method: 'GET'
      });
+
  }
 
 

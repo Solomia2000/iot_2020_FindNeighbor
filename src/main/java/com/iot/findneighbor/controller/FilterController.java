@@ -27,45 +27,56 @@ public class FilterController {
 
     @Autowired
     FilterService filterService;
-
-    @GetMapping("/address")
-    public List<User> filterUser(@RequestParam(value = "username") String username){
-        Optional<User> optional = userDAO.findByUsername(username);
-        User user = optional.isPresent() ? optional.get() : new User();
-        System.out.println("I am here " + user.getUsername() );
-        Address address = addressDAO.findByUser(user);
-        List<User> users = userDAO.filterArea("Ukraine", "Lviv", "Halytskiy", user);
-        Optional<User> userIvanka = userDAO.findByUsername("tarasuk");
-        User userIv = userIvanka.isPresent() ? userIvanka.get() : new User();
-        users.add(userIv);
-        Optional<User> userSolomiyka = userDAO.findByUsername("solomiyka");
-        User userSo = userSolomiyka.isPresent() ? userSolomiyka.get() : new User();
-        users.add(userSo);
-        if (users.size()==0){
-            System.out.println("NUll");
-        }
-        for(int i = 0; i < users.size(); i++){
-            User user1 = users.get(i);
-            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
-        }
-
-        return  users;
-    }
+//
+//    @GetMapping("/address")
+//    public List<User> filterUser(@RequestParam(value = "username") String username){
+//        Optional<User> optional = userDAO.findByUsername(username);
+//        User user = optional.isPresent() ? optional.get() : new User();
+//        System.out.println("I am here " + user.getUsername() );
+//        Address address = addressDAO.findByUser(user);
+//        List<User> users = userDAO.filterArea("Ukraine", "Lviv", "Halytskiy", user);
+//        Optional<User> userIvanka = userDAO.findByUsername("tarasuk");
+//        User userIv = userIvanka.isPresent() ? userIvanka.get() : new User();
+//        users.add(userIv);
+//        Optional<User> userSolomiyka = userDAO.findByUsername("solomiyka");
+//        User userSo = userSolomiyka.isPresent() ? userSolomiyka.get() : new User();
+//        users.add(userSo);
+//        if (users.size()==0){
+//            System.out.println("NUll");
+//        }
+//        for(int i = 0; i < users.size(); i++){
+//            User user1 = users.get(i);
+//            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
+//        }
+//
+//        return  users;
+//    }
 
     @GetMapping("/user/search")
     public List<User> filteringByPreference(@RequestParam Long id, @RequestParam  Boolean fullAddress, @RequestParam Boolean sex,
                                             @RequestParam Boolean age){
-        List<User> users = filterService.filterByArea(id);
+        List<User> usersByAddress = new ArrayList<>();
+        List <User> usersBySex = new ArrayList<>();
+        List <User> usersByAge = new ArrayList<>();
+        System.out.println(usersByAddress.size());
+        System.out.println("Full adreess " + fullAddress);
+        System.out.println("Age " + age);
+        System.out.println("Sex " + sex);
         if(fullAddress==false){
-            users = filterService.filterByAddress(id);
+            usersByAddress = filterService.filterByAddress(id);
+        }
+        else{
+            usersByAddress = filterService.filterByArea(id);
         }
         if(sex==true){
-            users = filterService.filterBySex(id);
+            usersByAddress = filterService.userFiltrationBySex(id, usersByAddress);
         }
         if(age==true){
-            users = filterService.filterByAge(id);
+          usersByAddress = filterService.userFiltrationByAge(id, usersByAddress);
         }
-        return users;
+
+
+        return usersByAddress;
     }
 
 

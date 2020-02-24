@@ -8,6 +8,7 @@ import com.iot.findneighbor.request.JwtAuthenticationResponse;
 import com.iot.findneighbor.request.LoginRequest;
 import com.iot.findneighbor.request.SignUpRequest;
 import com.iot.findneighbor.security.JwtTokenProvider;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(value = {"*"}, exposedHeaders = {"Content-Disposition"})
 public class AuthController {
 
     @Autowired

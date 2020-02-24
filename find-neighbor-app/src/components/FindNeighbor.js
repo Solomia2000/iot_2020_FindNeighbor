@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {checkEmailAvailability, filterUserListByAddress} from "../util/APIUtils";
+import {checkEmailAvailability, filterUserListByAddress, userFiltration} from "../util/APIUtils";
 import {Button, Form, notification} from "antd";
 import {API_BASE_URL} from "../constants";
 
@@ -7,6 +7,9 @@ class FindNeighbor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            fullAddress: true,
+            sex: true,
+            age: true,
             usernameInfo: this.props.currentUser,
             peoplesWhoFitCriteria: {},
             isHidden: true
@@ -27,23 +30,33 @@ class FindNeighbor extends Component {
 
         console.log(this.state.usernameInfo)
 
-        filterUserListByAddress("solomiyka")
+        userFiltration(this.state.usernameInfo.id, this.state.fullAddress, this.state.age, this.state.sex)
             .then(response => {
                 if(response) {
 
-                     console.log("Ooo yes",response );
+                    console.log("Ooo yes",response );
 
                 } else {
                 }
             });
 
-       // // filterUserListByAddress(this.state.usernameInfo.username)
-       //  filterUserListByAddress(this.state.usernameInfo.username)
-       //      .then(response => response.data)
-       //      .then(data => console.log("data", data))
-       //      .catch(e => console.warn(`ERROR::: ${e.message}`))
     }
 
+    toggleChangeFullAddress = () => {
+        this.setState({
+            fullAddress: !this.state.fullAddress
+        });
+    }
+    toggleChangeSex = () => {
+        this.setState({
+            sex: !this.state.sex
+        });
+    }
+    toggleChangeAge = () => {
+        this.setState({
+            age: !this.state.age
+        });
+    }
 
     render() {
         console.log(this.props.currentUser);
@@ -56,6 +69,30 @@ class FindNeighbor extends Component {
                 <button onClick={this.requestFilteringByAddress.bind(this)} >
                     Click to show modal
                 </button>
+                <br></br>
+                <label>
+                    <input type="checkbox"
+                           checked={this.state.fullAddress}
+                           onChange={this.toggleChangeFullAddress}
+                    />
+                    Full address
+                </label>
+                <br></br>
+                <label>
+                    <input type="checkbox"
+                           checked={this.state.sex}
+                           onChange={this.toggleChangeSex}
+                    />
+                    Sex
+                </label>
+                <br></br>
+                <label>
+                    <input type="checkbox"
+                           checked={this.state.age}
+                           onChange={this.toggleChangeAge}
+                    />
+                    Age
+                </label>
                 {/*{!this.state.isHidden && <Child />}*/}
             </div>
 

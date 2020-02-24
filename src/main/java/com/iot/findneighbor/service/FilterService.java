@@ -59,4 +59,26 @@ public class FilterService{
         List<User> users = userDAO.filterAge(userPreferences.getStartAge(), userPreferences.getEndAge());
         return users;
     }
+
+    public List <User> userFiltrationByAge(Long id, List<User> users){
+        List <User> usersByAge = filterByAge(id);
+        for(int i = 0; i < users.size(); i++){
+            User user = users.get(i);
+            if(!usersByAge.contains(user)){
+                users.remove(user);
+            }
+        }
+        return users;
+    }
+
+    public List <User> userFiltrationBySex(Long id, List<User> users){
+        List <User> usersBySex = filterByAge(id);
+        for(int i = 0; i < users.size(); i++){
+            User user = users.get(i);
+            if(!usersBySex.contains(user)){
+                users.remove(user);
+            }
+        }
+        return users;
+    }
 }

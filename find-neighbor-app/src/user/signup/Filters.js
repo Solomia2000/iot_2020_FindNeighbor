@@ -24,6 +24,7 @@ class Filters extends Component {
         this.handleChangePets = this.handleChangePets.bind(this);
         this.handleChangeSex = this.handleChangeSex.bind(this);
         this.validateStartAge=this.validateStartAge.bind(this);
+        this.validateEndAge=this.validateEndAge.bind(this);
         this.handleInputChange=this.handleInputChange.bind(this);
         this.handleEndAge=this.handleEndAge.bind(this);
         this.handleStartPrice=this.handleStartPrice.bind(this);
@@ -108,7 +109,7 @@ class Filters extends Component {
     }
 
     isFormInvalid() {
-        return !(this.state.startAge.validateStatus === 'success'
+        return !(this.state.startAge.validateStatus === 'success'&&this.state.endAge.validateStatus === 'success'
         );
     }
 
@@ -129,14 +130,38 @@ class Filters extends Component {
                 errorMsg: 'Start age may not be less than 14'
             }
         }
-        else
-            {
+        if(startAge > 120){
+            return {
+                validateStatus: 'error',
+                errorMsg: 'Start age may not be more than 120'
+            }
+        }
+        else {
+            return {
+                validateStatus: "success",
+                errorMsg: null
+            }
+        }
+    }
+        validateEndAge = (endAge) => {
+            if(endAge < this.state.startAge) {
+                return {
+                    validateStatus: 'error',
+                    errorMsg: 'End age may not be less than start age'
+                }
+            }
+            if (endAge > 200) {
+                return {
+                    validateStatus: 'error',
+                    errorMsg: 'End age may not be more than 200'
+                }
+            }else {
                 return {
                     validateStatus: "success",
                     errorMsg: null
                 }
+            }
         }
-}
 
 
 
@@ -164,8 +189,9 @@ class Filters extends Component {
                     type="number"
                     autoComplete="off"
                     value={this.state.endAge}
-                    onChange={
-                        this.handleEndAge} />
+                    onBlur={this.validateEndAge}
+                    onChange={(event) =>
+                        this.handleInputChange(event, this.validateEndAge)} />
                 </FormItem>
                 <FormItem>
                     <p>Please set the desired price for the apartment</p>
@@ -192,8 +218,8 @@ class Filters extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="Yes, I want to live with a man"
-                                    checked={this.state.sex === "Yes, I want to live with a man"}
+                                    value="man"
+                                    checked={this.state.sex === "man"}
                                     onChange={this.handleChangeSex}
                                 />
                                 Yes, I want to live with a man
@@ -204,8 +230,8 @@ class Filters extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="Yes, I want to live with a woman"
-                                    checked={this.state.sex === "Yes, I want to live with a woman"}
+                                    value="woman"
+                                    checked={this.state.sex === "woman"}
                                     onChange={this.handleChangeSex}
                                 />
                                 Yes, I want to live with a woman
@@ -216,8 +242,8 @@ class Filters extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="No difference"
-                                    checked={this.state.sex === "No difference"}
+                                    value="-"
+                                    checked={this.state.sex === "-"}
                                     onChange={this.handleChangeSex}
                                 />
                                 No difference
@@ -256,8 +282,8 @@ class Filters extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="dont know"
-                                    checked={this.state.pets === "dont know"}
+                                    value="-"
+                                    checked={this.state.pets === "-"}
                                     onChange={this.handleChangePets}
                                 />
                                 Don`t know
@@ -297,8 +323,8 @@ class Filters extends Component {
                             <label>
                                 <input
                                     type="radio"
-                                    value="dont know"
-                                    checked={this.state.badHabits === "dont know"}
+                                    value="-"
+                                    checked={this.state.badHabits === "-"}
                                     onChange={this.handleChangeBadHabits}
                                 />
                                 Don`t know

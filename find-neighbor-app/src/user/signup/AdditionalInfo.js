@@ -2,17 +2,17 @@ import React, {Component} from "react";
 import {additionalInfo, signup} from "../../util/APIUtils";
 import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/lib/form/FormItem";
-
-
-
-
-
+import Calendar from 'react-calendar-pane';
+import moment, { calendarFormat } from 'moment';
+import date from 'react-calendar-pane';
 
 class AdditionalInfo extends Component {
     constructor(props) {
 
         super(props);
+        const src = '../../ProfilePicture.png';
         this.state = {
+            selectedDate:moment(),
             badHabits: false,
             kindOfActivity: false,
             jobOrJobless: false,
@@ -21,12 +21,12 @@ class AdditionalInfo extends Component {
             sex: '',
             moreAboutUser: '',
             userId: this.props.match.params,
-            date: new Date(),
-            selectedDate: '',
-            setSelectedDate: '',
-            handleDateChange: ''
+            handleDateChange: '',
+            age: 0,
+            imagePreviewUrl: ''
 
         }
+        this.profilePictureRef = React.createRef();
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeBadHabits = this.handleChangeBadHabits.bind(this);
@@ -37,6 +37,10 @@ class AdditionalInfo extends Component {
         this.handleChangeJobOrJobless = this.handleChangeJobOrJobless.bind(this);
         this.handleChangeMoreAboutUser = this.handleChangeMoreAboutUser.bind(this);
 
+    }
+
+    onSelect=(e)=>{
+        this.setState({selectedDate:e})
     }
 
     handleChangeBadHabits(event) {
@@ -86,21 +90,47 @@ class AdditionalInfo extends Component {
         // console.log(this.state.badHabits);
     }
 
+    handleImageChange(e){
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () =>{
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            })
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
+        const data = this.state.imagePreviewUrl.split(',')[1];
+        let raw = window.btoa(data);
+        let rawLength = raw.length;
+        let array = new Uint8Array(new ArrayBuffer(rawLength));
+        for(let i = 0; i < rawLength; i++){
+            array[i] = raw.charCodeAt(i);
+        }
 
+        let picture = [];
+        for(let i = 0; i < rawLength; i++){
+            picture.push(array[i]);
+        }
+        this.state.age = getAge(this.state.selectedDate)
+        console.log(this.state.age);
         const additionalInfoRequest = {
+            preview: this.state.preview,
             badHabits: this.state.badHabits,
             kindOfActivity: this.state.kindOfActivity,
             maritalStatus: this.state.maritalStatus,
             pets: this.state.pets,
             sex: this.state.sex,
             moreAboutUser: this.state.moreAboutUser,
-            userId: this.state.userId
-
+            userId: this.state.userId,
+            age: this.state.age,
+            image: picture
 
         };
-        console.log(this.state.userId);
+        console.log(this.state.age);
         let username = this.state.userId;
         console.log(Object.values(username));
         additionalInfo(additionalInfoRequest, this.props.match.params)
@@ -144,7 +174,16 @@ class AdditionalInfo extends Component {
         render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <div>
+                    <label>image</label>
+                    <div>
+                        <input type="file" onChange={(e)=>this.handleImageChange} />
+                    </div>
 
+                </div>
+                <h4>Set your age</h4>
+                <p> The date you've selected is: {this.state.selectedDate.format('YYYY-MM-DD')} </p>
+                <Calendar date={moment("23/09/1999", "DD/MM/YYYY")} onSelect={this.onSelect} />
                 <FormItem>
                 <p>Do you have some bad habits?</p>
                 <ul>
@@ -363,5 +402,15 @@ class AdditionalInfo extends Component {
     }
 }
 
+function getAge(selectedDate) {
+    let today = new Date();
+    let birthDate = new Date(selectedDate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
 
 export default  AdditionalInfo
