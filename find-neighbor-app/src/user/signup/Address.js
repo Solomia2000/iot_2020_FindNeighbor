@@ -102,7 +102,6 @@ class Address extends Component {
                                     htmlType="submit"
                                     size="large"
                                     className="signup-form-button"
-
                             >Add address</Button>
 
                         </FormItem>

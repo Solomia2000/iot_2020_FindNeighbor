@@ -337,6 +337,7 @@ class Filters extends Component {
 
                 <button type="submit">Ok</button>
             </form>
+
         );
     }
 }

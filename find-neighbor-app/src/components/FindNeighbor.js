@@ -66,6 +66,7 @@ class FindNeighbor extends Component {
         console.log(this.peoplesWhoFitCriteria)
         return (
             <div>
+                <div>
                 <button onClick={this.requestFilteringByAddress.bind(this)} >
                     Click to show modal
                 </button>
@@ -96,18 +97,13 @@ class FindNeighbor extends Component {
                 {/*{!this.state.isHidden && <Child />}*/}
             </div>
 
+            </div>
+
         );
     }
 
 
 }
 
-// const Child = () => (
-//     <div className='modal'>
-//         <button onClick={this.requestFilteringByAddress} >
-//             ADDRESS
-//         </button>
-//     </div>
-// )
 
 export default FindNeighbor
