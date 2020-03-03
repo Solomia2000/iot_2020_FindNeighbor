@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import {checkEmailAvailability, filterUserListByAddress, userFiltration} from "../util/APIUtils";
-import {Button, Form, notification} from "antd";
-import {API_BASE_URL} from "../constants";
+import './FindNeighbor.css';
+import {userFiltration} from "../util/APIUtils";
+import ListOfNeighbor from "./ListOfNeighbor";
 
 class FindNeighbor extends Component {
     constructor(props) {
@@ -11,34 +11,43 @@ class FindNeighbor extends Component {
             sex: true,
             age: true,
             usernameInfo: this.props.currentUser,
-            peoplesWhoFitCriteria: {},
-            isHidden: true
+            peoplesWhoFitCriteria: [{}],
+            text: 'test'
         }
 
-
         this.requestFilteringByAddress = this.requestFilteringByAddress.bind(this);
+        this.userBlock=this.userBlock.bind(this);
     }
 
-    toggleHidden() {
-        this.setState({
-            isHidden: !this.state.isHidden
-        })
+
+    userBlock = () =>  {
+
+        return(<div className="userBlock">
+            <p>{}</p>
+        </div>)
     }
+
+    getDocFinancialInfo = docId => {
+        this.setState({ peoplesList: docId});
+        console.log(docId);
+        console.log(this.state.peoplesWhoFitCriteria);
+    };
 
     requestFilteringByAddress(event) {
         event.preventDefault();
 
-        console.log(this.state.usernameInfo)
-
+        this.state.username = this.state.usernameInfo.name;
         userFiltration(this.state.usernameInfo.id, this.state.fullAddress, this.state.age, this.state.sex)
             .then(response => {
                 if(response) {
-
-                    console.log("Ooo yes",response );
-
-                } else {
+                    console.log(response)
+                    this.state.peoplesWhoFitCriteria = [...response];
+                    console.log(this.state.peoplesWhoFitCriteria);
+                    this.getDocFinancialInfo(response);
                 }
             });
+
+        this.userBlock();
 
     }
 
@@ -52,6 +61,7 @@ class FindNeighbor extends Component {
             sex: !this.state.sex
         });
     }
+
     toggleChangeAge = () => {
         this.setState({
             age: !this.state.age
@@ -59,12 +69,16 @@ class FindNeighbor extends Component {
     }
 
     render() {
-        console.log(this.props.currentUser);
-        console.log(this.username);
-        // this.request()
-        const element = <h1>Hello, world</h1>;
-        console.log(this.peoplesWhoFitCriteria)
+        let name;
+        console.log(this.state.peoplesWhoFitCriteria)
+        if(this.state.peoplesWhoFitCriteria.length < 1){
+            name = <p>Sorry, we dont find any user</p>
+        }
+        else{
+            name =  <ListOfNeighbor peoplesList={this.state.peoplesList} usernameInfo={this.state.usernameInfo}/>
+        }
         return (
+
             <div>
                 <div>
                 <button onClick={this.requestFilteringByAddress.bind(this)} >
@@ -94,9 +108,8 @@ class FindNeighbor extends Component {
                     />
                     Age
                 </label>
-                {/*{!this.state.isHidden && <Child />}*/}
             </div>
-
+                {name}
             </div>
 
         );
@@ -104,6 +117,5 @@ class FindNeighbor extends Component {
 
 
 }
-
 
 export default FindNeighbor

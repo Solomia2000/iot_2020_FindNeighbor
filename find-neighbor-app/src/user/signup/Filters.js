@@ -143,7 +143,7 @@ class Filters extends Component {
             }
         }
     }
-        validateEndAge = (endAge) => {
+    validateEndAge = (endAge) => {
             if(endAge < this.state.startAge) {
                 return {
                     validateStatus: 'error',

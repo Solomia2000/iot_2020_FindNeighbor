@@ -10,6 +10,7 @@ import com.iot.findneighbor.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,15 @@ public class FilterService{
     public List<User> filterBySex(Long id){
         User user = findUser(id);
         Preferences userPreferences = preferencesDAO.findByUser(user);
-        List<User> users = userDAO.filterSex(userPreferences.getSex());
+
+        List<User> users = new ArrayList<>();
+        if(userPreferences.getSex() != "-") {
+             users = userDAO.filterSex(userPreferences.getSex());
+        }
+        else {
+            return null;
+        }
+
         return users;
     }
 
@@ -76,12 +85,16 @@ public class FilterService{
 
     public List <User> userFiltrationBySex(Long id, List<User> users){
         List <User> usersBySex = filterBySex(id);
-        for(int i = 0; i < users.size(); i++){
-            User user = users.get(i);
-            if(!usersBySex.contains(user)){
-                users.remove(user);
+
+        if(usersBySex.size() != 0) {
+            for (int i = 0; i < users.size(); i++) {
+                User user = users.get(i);
+                if (!usersBySex.contains(user)) {
+                    users.remove(user);
+                }
             }
         }
+
         return users;
     }
 }

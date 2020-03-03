@@ -130,9 +130,9 @@ class AdditionalInfo extends Component {
             image: picture
 
         };
-        console.log(this.state.age);
+
         let username = this.state.userId;
-        console.log(Object.values(username));
+
         additionalInfo(additionalInfoRequest, this.props.match.params)
             .then(response => {
                 notification.success({
