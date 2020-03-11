@@ -1,0 +1,10 @@
+.userBlock{
+    width: 90%;
+    border-color: darkgray;
+    border-style: ridge;
+    border-width:1px 1px 1px 1px;
+}
+
+.userBlock p{
+    text-decoration-color: #ff1510;
+}

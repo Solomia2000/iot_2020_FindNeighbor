@@ -18,19 +18,10 @@ const request = (options) => {
 
     return fetch(options.url, options)
         .then(res => {
-            console.log('x', res)
             return res;
         })
         .then(res => res.json())
         .catch(err => Promise.reject(err))
-        // .then(response =>
-        //     response.json().then(json => {
-        //         if (!response.ok) {
-        //             return Promise.reject(json);
-        //         }
-        //         return json;
-        //     })
-        // );
 };
 
 
@@ -51,7 +42,6 @@ export function signup(signupRequest) {
 }
 
 export function additionalInfo(additionalInfoRequest, username) {
-    // const username = {value: additionalInfoRequest.userId};
 
     return request({
 
@@ -65,8 +55,6 @@ export function additionalInfo(additionalInfoRequest, username) {
 }
 
 export function filterRequest(filterRequest, username) {
-    // const username = {value: additionalInfoRequest.userId};
-
     return request({
 
         url: API_BASE_URL + "/auth/signup/"+
@@ -79,7 +67,6 @@ export function filterRequest(filterRequest, username) {
 }
 
 export function addressRequest(addressRequest, username) {
-    // const username = {value: additionalInfoRequest.userId};
 
     return request({
 
@@ -119,19 +106,10 @@ export function checkEmailAvailability(email) {
 
  export function getUserAdditionalInfo(id) {
      return request({
-         url: API_BASE_URL + "/additionalInfo/?userId=" + id,
+         url: API_BASE_URL + "/userProfileForSearching?userId=" + id,
          method: 'GET'
      });
  }
-
-export function checkIfUserFilterExist(username) {
-    return request({
-        url: API_BASE_URL + "/user/checkFilters?username=" + username,
-        method: 'GET'
-    });
-}
-
-
 
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {

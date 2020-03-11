@@ -4,9 +4,11 @@ import com.iot.findneighbor.DAO.AdditionalInfoDAO;
 import com.iot.findneighbor.DAO.AddressDAO;
 import com.iot.findneighbor.DAO.PreferencesDAO;
 import com.iot.findneighbor.DAO.UserDAO;
+import com.iot.findneighbor.domain.AdditionalInfo;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.Preferences;
 import com.iot.findneighbor.domain.User;
+import com.iot.findneighbor.request.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,5 +98,19 @@ public class FilterService{
         }
 
         return users;
+    }
+
+    public List<UserProfile> setUserProfiles(List<User> usersByAddress) {
+        List<UserProfile> userProfiles = new ArrayList<>();
+        for (int i = 0; i < usersByAddress.size(); i++){
+            User user = usersByAddress.get(i);
+            AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user);
+            UserProfile userProfile = new UserProfile(user.getId(), user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),
+                    additionalInfo.getImage());
+
+            userProfiles.add(userProfile);
+        }
+
+        return userProfiles;
     }
 }

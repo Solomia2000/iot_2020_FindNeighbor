@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import './FindNeighbor.css';
-import {userFiltration} from "../util/APIUtils";
+import {getUserAdditionalInfo, getUserProfile, userFiltration} from "../util/APIUtils";
 import ListOfNeighbor from "./ListOfNeighbor";
-
 class FindNeighbor extends Component {
     constructor(props) {
         super(props);
@@ -81,34 +80,34 @@ class FindNeighbor extends Component {
 
             <div>
                 <div>
-                <button onClick={this.requestFilteringByAddress.bind(this)} >
-                    Click to show modal
-                </button>
-                <br></br>
-                <label>
-                    <input type="checkbox"
-                           checked={this.state.fullAddress}
-                           onChange={this.toggleChangeFullAddress}
-                    />
-                    Full address
-                </label>
-                <br></br>
-                <label>
-                    <input type="checkbox"
-                           checked={this.state.sex}
-                           onChange={this.toggleChangeSex}
-                    />
-                    Sex
-                </label>
-                <br></br>
-                <label>
-                    <input type="checkbox"
-                           checked={this.state.age}
-                           onChange={this.toggleChangeAge}
-                    />
-                    Age
-                </label>
-            </div>
+                    <button onClick={this.requestFilteringByAddress.bind(this)} >
+                        Click to show modal
+                    </button>
+                    <br></br>
+                    <label>
+                        <input type="checkbox"
+                               checked={this.state.fullAddress}
+                               onChange={this.toggleChangeFullAddress}
+                        />
+                        Full address
+                    </label>
+                    <br></br>
+                    <label>
+                        <input type="checkbox"
+                               checked={this.state.sex}
+                               onChange={this.toggleChangeSex}
+                        />
+                        Sex
+                    </label>
+                    <br></br>
+                    <label>
+                        <input type="checkbox"
+                               checked={this.state.age}
+                               onChange={this.toggleChangeAge}
+                        />
+                        Age
+                    </label>
+                </div>
                 {name}
             </div>
 
@@ -117,5 +116,4 @@ class FindNeighbor extends Component {
 
 
 }
-
 export default FindNeighbor

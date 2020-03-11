@@ -4,6 +4,7 @@ import com.iot.findneighbor.DAO.AddressDAO;
 import com.iot.findneighbor.DAO.UserDAO;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
+import com.iot.findneighbor.request.UserProfile;
 import com.iot.findneighbor.service.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +54,8 @@ public class FilterController {
 //    }
 
     @GetMapping("/user/search")
-    public List<User> filteringByPreference(@RequestParam Long id, @RequestParam  Boolean fullAddress, @RequestParam Boolean sex,
-                                            @RequestParam Boolean age){
+    public List<UserProfile> filteringByPreference(@RequestParam Long id, @RequestParam  Boolean fullAddress, @RequestParam Boolean sex,
+                                                   @RequestParam Boolean age){
         List<User> usersByAddress = new ArrayList<>();
         List <User> usersBySex = new ArrayList<>();
         List <User> usersByAge = new ArrayList<>();
@@ -75,8 +76,9 @@ public class FilterController {
           usersByAddress = filterService.userFiltrationByAge(id, usersByAddress);
         }
 
+        List<UserProfile> userProfiles = filterService.setUserProfiles(usersByAddress);
 
-        return usersByAddress;
+        return userProfiles;
     }
 
 

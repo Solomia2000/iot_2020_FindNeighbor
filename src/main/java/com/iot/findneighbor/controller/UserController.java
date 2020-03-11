@@ -1,9 +1,12 @@
 package com.iot.findneighbor.controller;
 
+import com.iot.findneighbor.DAO.AdditionalInfoDAO;
 import com.iot.findneighbor.DAO.AddressDAO;
 import com.iot.findneighbor.DAO.UserDAO;
+import com.iot.findneighbor.domain.AdditionalInfo;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
+import com.iot.findneighbor.request.FilterUserProfile;
 import com.iot.findneighbor.request.UserIdentityAvailability;
 import com.iot.findneighbor.request.UserSummary;
 import com.iot.findneighbor.security.CurrentUser;
@@ -29,6 +32,9 @@ public class UserController {
 
     @Autowired
     AddressDAO addressDAO;
+
+    @Autowired
+    AdditionalInfoDAO additionalInfoDAO;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -61,24 +67,13 @@ public class UserController {
         return user;
     }
 
-//    @GetMapping("/address")
-//    public User Test(@RequestParam(value = "username") String username){
-//        Optional<User> optional = userDAO.findByUsername(username);
-//        User user = optional.isPresent() ? optional.get() : new User();
-//        System.out.println("I am here " + user.getUsername() );
-//        Address address = addressDAO.findByUser(user);
-//        List<User> users = userDAO.filterArea("Ukraine", "Lviv", "Halytskiy", user);
-//            Optional<User> userIvanka = userDAO.findByUsername("tarasuk");
-//            User userIv = userIvanka.isPresent() ? userIvanka.get() : new User();
-//        users.add(userIv);
-//        if (users.size()==0){
-//            System.out.println("NUll");
-//        }
-//        for(int i = 0; i < users.size(); i++){
-//            User user1 = users.get(i);
-//            System.out.println(user1.getUsername() + " " + user1.getEmail() + " " + user1.getName());
-//        }
-//
-//            return  userIv;
-//        }
+    @GetMapping("/userProfileForSearching")
+    public FilterUserProfile findAdditionalInfoByUserId(@RequestParam Long userId){
+        Optional<User> optionalUser = userDAO.findById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+        AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user);
+        FilterUserProfile filterUserProfile = new FilterUserProfile(userId, user.getName(), additionalInfo.getAge(),
+                additionalInfo.getImage());
+        return filterUserProfile;
+    }
 }
