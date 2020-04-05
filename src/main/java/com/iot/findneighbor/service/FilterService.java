@@ -12,6 +12,15 @@ import com.iot.findneighbor.request.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -100,17 +109,39 @@ public class FilterService{
         return users;
     }
 
-    public List<UserProfile> setUserProfiles(List<User> usersByAddress) {
+    public List setUserProfiles(List<User> usersByAddress) throws IOException {
         List<UserProfile> userProfiles = new ArrayList<>();
         for (int i = 0; i < usersByAddress.size(); i++){
             User user = usersByAddress.get(i);
             AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user);
+            System.out.println("Im " + additionalInfo.getImage());
+            Image userImage = getImage(additionalInfo.getImage());
             UserProfile userProfile = new UserProfile(user.getId(), user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),
-                    additionalInfo.getImage());
+                    userImage);
 
             userProfiles.add(userProfile);
         }
 
         return userProfiles;
+    }
+
+    public Image getImage(byte[] image) throws IOException {
+//        System.out.println(image);
+//        ByteArrayInputStream bais = new ByteArrayInputStream(image);
+//        BufferedImage bImage = ImageIO.read(bais);
+//        System.out.println(bImage);
+//        return bImage;
+        System.out.println(image);
+        BufferedImage buffered_image= ImageIO.read(new File("userImage.png"));
+        ByteArrayOutputStream output_stream= new ByteArrayOutputStream();
+        ImageIO.write(buffered_image, "png", output_stream);
+        byte [] byte_array = output_stream.toByteArray();
+        ByteArrayInputStream input_stream= new ByteArrayInputStream(byte_array);
+        System.out.println("140 " + input_stream);
+        BufferedImage final_buffered_image = ImageIO.read(input_stream);
+        System.out.println("142 " + final_buffered_image);
+        ImageIO.write(final_buffered_image , "png", new File("final_file.png") );
+        System.out.println("Converted Successfully!");
+        return null;
     }
 }

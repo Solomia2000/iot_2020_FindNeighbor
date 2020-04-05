@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Lob;
+import java.awt.*;
 import java.time.Instant;
 
 @Data
@@ -16,9 +17,9 @@ public class UserProfile {
     private String sex;
     @Lob
     @JsonProperty("image")
-    private byte[] image;
+    private Image image;
 
-    public UserProfile(Long id, String name, int age, String sex, byte[] image) {
+    public UserProfile(Long id, String name, int age, String sex, Image image) {
         this.id=id;
         this.name=name;
         this.age=age;
