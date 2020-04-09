@@ -24,6 +24,7 @@ public class AuditingConfig {
 class SpringSecurityAuditAwareImpl implements AuditorAware<Long> {
 
     @Override
+
     public Optional<Long> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
