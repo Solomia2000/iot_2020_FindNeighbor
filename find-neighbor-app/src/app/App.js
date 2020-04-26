@@ -5,14 +5,9 @@ import {
     withRouter,
     Switch
 } from 'react-router-dom';
-
-
 import { ACCESS_TOKEN } from '../constants';
-
 import Signup from '../user/signup/Signup';
-
 import Address from '../user/signup/Address';
-
 import Profile from '../user/profile/Profile';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
@@ -134,7 +129,7 @@ class App extends Component {
                                 {/*    path="/:username/address" component={Address}></Route>*/}
                                    <Route
                                     //  currentUser={this.state.currentUser}
-                                    path="/:username/address"  render = {(props) => <Address {...props} isAuthenticated={this.isAuthenticated}
+                                    path="/:username/address"  render = {(props) => <Address {...props} onLogin={this.handleLogin} isAuthenticated={this.isAuthenticated}
                                                                        currentUser={this.currentUser}/>}>
                                     </Route>
                                 <Route path="/users/:username"

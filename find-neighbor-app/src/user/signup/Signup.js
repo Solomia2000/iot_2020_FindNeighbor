@@ -64,7 +64,7 @@ class Signup extends Component {
                 message: 'Find Neighbor App',
                 description: "Thank you! You're successfully registered. Please set your additional info!",
             });
-
+            this.props.onLogin();
             this.props.history.push("/"+this.state.username.value+"/additionalInfo");
         }).catch(error => {
             notification.error({

@@ -57,7 +57,7 @@ class Address extends Component {
                     description: "Thank you!",
                 });
 
-                this.props.history.push("/login");
+                this.props.onLogin();
             }).catch(error => {
             notification.error({
                 message: 'Find Neighbor App',
