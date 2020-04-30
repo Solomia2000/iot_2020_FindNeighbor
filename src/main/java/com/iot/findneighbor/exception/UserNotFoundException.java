@@ -4,16 +4,15 @@ import com.iot.findneighbor.domain.User;
 import lombok.Getter;
 
 @Getter
-public class ResourceNotFoundException extends RuntimeException {
+public class UserNotFoundException extends RuntimeException{
     private String resourceName;
     private String fieldName;
-    private Object fieldValue;
+    private User fieldValue;
 
-    public ResourceNotFoundException( String resourceName, String fieldName, Object fieldValue) {
+    public UserNotFoundException( String resourceName, String fieldName, User fieldValue) {
         super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
-
 }

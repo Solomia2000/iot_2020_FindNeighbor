@@ -8,9 +8,14 @@ import com.iot.findneighbor.domain.AdditionalInfo;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.Preferences;
 import com.iot.findneighbor.domain.User;
+import com.iot.findneighbor.exception.ResourceNotFoundException;
+import com.iot.findneighbor.exception.UserNotFoundException;
 import com.iot.findneighbor.request.UserProfile;
+import com.iot.findneighbor.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -39,29 +44,60 @@ public class FilterService{
     @Autowired
     AddressDAO addressDAO;
 
-    User findUser(Long id){
-        Optional<User> optional = userDAO.findById(id);
-        User user = optional.isPresent() ? optional.get() : new User();
+    @Transactional
+    public User findUser(Long id) {
+        User user = userDAO.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("User", "id", id)
+        );
+
         return user;
     }
 
-    public List<User> filterByAddress(Long id){
+    @Transactional
+    public Address findAddress(User user) {
+        Address address = addressDAO.findByUser(user)
+                .orElseThrow(
+                () -> new UserNotFoundException("Address", "user", user)
+        );
+        return address;
+    }
+
+    @Transactional
+    public Preferences findPreferences(User user) {
+        Preferences preferences = preferencesDAO.findByUser(user)
+                .orElseThrow(
+                        () -> new UserNotFoundException("Preferences", "user", user)
+                );
+        return preferences;
+    }
+
+    @Transactional
+    public AdditionalInfo findAdditional(User user) {
+        AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user)
+                .orElseThrow(
+                        () -> new UserNotFoundException("Additional info", "user", user)
+                );
+        return additionalInfo;
+    }
+
+    @Transactional
+    public List<User> filterByAddress(Long id) throws ResourceNotFoundException{
         User user = findUser(id);
-        Address address = addressDAO.findByUser(user);
+        Address address = findAddress(user);
         List<User> users = userDAO.filterAddress(address.getCountry(), address.getCity(), user);
         return users;
     }
 
     public List<User> filterByArea(Long id){
         User user = findUser(id);
-        Address address = addressDAO.findByUser(user);
+        Address address = findAddress(user);
         List<User> users = userDAO.filterArea(address.getCountry(), address.getCity(), address.getArea(), user);
         return users;
     }
 
     public List<User> filterBySex(Long id){
         User user = findUser(id);
-        Preferences userPreferences = preferencesDAO.findByUser(user);
+        Preferences userPreferences = findPreferences(user);
 
         List<User> users = new ArrayList<>();
         if(userPreferences.getSex() != "-") {
@@ -76,7 +112,7 @@ public class FilterService{
 
     public List<User> filterByAge(Long id){
         User user = findUser(id);
-        Preferences userPreferences = preferencesDAO.findByUser(user);
+        Preferences userPreferences = findPreferences(user);
         List<User> users = userDAO.filterAge(userPreferences.getStartAge(), userPreferences.getEndAge());
         return users;
     }
@@ -113,7 +149,7 @@ public class FilterService{
         List<UserProfile> userProfiles = new ArrayList<>();
         for (int i = 0; i < usersByAddress.size(); i++){
             User user = usersByAddress.get(i);
-            AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user);
+            AdditionalInfo additionalInfo = findAdditional(user);
             System.out.println("Im " + additionalInfo.getImage());
             Image userImage = getImage(additionalInfo.getImage());
             UserProfile userProfile = new UserProfile(user.getId(), user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),

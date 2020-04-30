@@ -6,6 +6,7 @@ import com.iot.findneighbor.DAO.UserDAO;
 import com.iot.findneighbor.domain.AdditionalInfo;
 import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
+import com.iot.findneighbor.exception.UserNotFoundException;
 import com.iot.findneighbor.request.FilterUserProfile;
 import com.iot.findneighbor.request.UserIdentityAvailability;
 import com.iot.findneighbor.request.UserSummary;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +37,15 @@ public class UserController {
 
     @Autowired
     AdditionalInfoDAO additionalInfoDAO;
+
+    @Transactional
+    public AdditionalInfo findAdditionalInfo(User user) {
+        AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user)
+                .orElseThrow(
+                        () -> new UserNotFoundException("Additional info", "user", user)
+                );
+        return additionalInfo;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -71,7 +82,7 @@ public class UserController {
     public FilterUserProfile findAdditionalInfoByUserId(@RequestParam Long userId){
         Optional<User> optionalUser = userDAO.findById(userId);
         User user = optionalUser.isPresent() ? optionalUser.get() : new User();
-        AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user);
+        AdditionalInfo additionalInfo = findAdditionalInfo(user);
         FilterUserProfile filterUserProfile = new FilterUserProfile(userId, user.getName(), additionalInfo.getAge(),
                 additionalInfo.getImage());
         return filterUserProfile;

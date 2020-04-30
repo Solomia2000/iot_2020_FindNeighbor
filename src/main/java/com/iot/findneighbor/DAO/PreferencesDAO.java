@@ -5,9 +5,10 @@ import com.iot.findneighbor.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.logging.FileHandler;
 
 @Repository
 public interface PreferencesDAO extends JpaRepository<Preferences, Long> {
-    Preferences findByUser(User user);
+    Optional<Preferences> findByUser(User user);
 }
