@@ -106,8 +106,8 @@ class App extends Component {
                     </AppHeader>
                 </div>
 
-                <div className="content-app">
-                    <Content className="app-content">
+                <div>
+                    <Content>
                         <div className="container">
                             <Switch>
                                 <Route exact path="/"

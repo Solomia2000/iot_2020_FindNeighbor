@@ -91,7 +91,7 @@ class Signup extends Component {
                             label="Full Name"
                             validateStatus={this.state.name.validateStatus}
                             help={this.state.name.errorMsg}>
-                            <Input 
+                            <Input
                                 size="large"
                                 name="name"
                                 autoComplete="off"

@@ -55,21 +55,16 @@ class AppHeader extends Component {
 
         return (
             <div className="app-header">
-
-                        <p></p>
-                        <Link to="/" className="app-title" >Find Neighbor App</Link>
-                    <div className="newMenu">
+                <Link to="/" className="app-title" >Find Neighbor App</Link>
+                <div className="newMenu">
                     <Menu
                         selectedKeys={[this.props.location.pathname]}>
                         {menuItems}
                     </Menu>
-                    </div>
-
+                </div>
             </div>
         );
     }
 }
-
-
 
 export default withRouter(AppHeader);

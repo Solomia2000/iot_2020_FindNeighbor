@@ -65,7 +65,6 @@ class LoginForm extends Component {
                     {getFieldDecorator('usernameOrEmail', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
-
                         <Input
                             size="large"
                             name="username"
