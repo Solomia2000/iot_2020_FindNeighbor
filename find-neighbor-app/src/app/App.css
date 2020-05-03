@@ -22,6 +22,9 @@
   color: white;
 }
 
+.app-content{
+  min-height: calc(100vh - 70px);
+}
 
 /*.container{*/
 /*  margin-top: 10%;*/
