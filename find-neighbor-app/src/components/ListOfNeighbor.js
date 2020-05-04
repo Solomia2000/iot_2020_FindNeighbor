@@ -1,7 +1,7 @@
 import { Component } from "react";
 import React from "react"
-import ReactDOM from 'react-dom';
-import {getUserAdditionalInfo} from "../util/APIUtils";
+import profileImage from './userPictureImage.png';
+import FindNeighbor from "./FindNeighbor.css";
 
 class ListOfNeighbor extends Component {
     constructor(props) {
@@ -11,16 +11,6 @@ class ListOfNeighbor extends Component {
         }
     }
 
-
-    // someMethod(){
-    //     let myBlob = new Blob([ZFc1a1pXWnBibVZr], {type: 'application/octet-binary'})
-    //     let myFile = blobToFile(myBlob, "MY.png")
-    //     const reader = new FileReader();
-    //     reader.addEventListener("loadend", function() {
-    //         // reader.result містить контент Blob у вигляді типізованого масиву
-    //     });
-    //     reader.readAsArrayBuffer;
-    // }
 
     render() {
         let userPhoto = 'ZFc1a1pXWnBibVZr'
@@ -55,7 +45,8 @@ function List({ peoples }) {
 function Item({ item }) {
     return (
        <div className="userBlock">
-           <p> <b> Name:</b> {item.name} Age: {item.age} Image: {item.image}</p>
+           <img className="profileImage" src={profileImage}/>
+           <b> Name:</b> {item.name} <b>Age:</b> {item.age}
            <div>
 
            </div>

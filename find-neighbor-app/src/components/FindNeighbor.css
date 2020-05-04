@@ -8,3 +8,9 @@
 .userBlock p{
     text-decoration-color: #ff1510;
 }
+
+.profileImage{
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
