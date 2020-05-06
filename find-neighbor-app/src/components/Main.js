@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
-
+import Grid from './join';
 
 class Main extends Component {
     constructor(props) {
@@ -29,6 +29,11 @@ class Main extends Component {
                 </div>
 
         );
+    }
+
+    render() {
+        return (
+        <Grid /> )
     }
 }
 

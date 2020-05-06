@@ -14,3 +14,19 @@
     width: 70px;
     height: 70px;
 }
+
+.join {
+    width: 1348px;
+    height: 350px;
+}
+
+.joinUs {
+    position: absolute;
+    width: 133px;
+    height: 40px;
+    left: 593px;
+    top: 393px;
+
+    background: #FFFFFF;
+    border-radius: 3px;
+}
