@@ -7,6 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserIdentityAvailability {
-    private Boolean available;
+public class UserAllInfoAvailability {
+    boolean additionalInfoIsAvailable;
+    boolean addressIsAvailable;
+    boolean preferencesIsAvailable;
 }

@@ -12,4 +12,5 @@ public interface AddressDAO extends JpaRepository<Address, Long> {
 
     Optional<Address> findByUser(User user);
 
+    Boolean existsByUser(User user);
 }

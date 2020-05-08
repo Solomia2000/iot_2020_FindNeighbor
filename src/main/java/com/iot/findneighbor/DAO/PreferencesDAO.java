@@ -11,4 +11,6 @@ import java.util.logging.FileHandler;
 @Repository
 public interface PreferencesDAO extends JpaRepository<Preferences, Long> {
     Optional<Preferences> findByUser(User user);
+
+    Boolean existsByUser(User user);
 }

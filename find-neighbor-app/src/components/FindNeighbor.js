@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './FindNeighbor.css';
-import {getUserAdditionalInfo, getUserProfile, userFiltration} from "../util/APIUtils";
+import {getUserAdditionalInfo, getUserProfile, userFiltration, checkUserAvailability} from "../util/APIUtils";
 import ListOfNeighbor from "./ListOfNeighbor";
 class FindNeighbor extends Component {
     constructor(props) {
@@ -11,11 +11,13 @@ class FindNeighbor extends Component {
             age: true,
             usernameInfo: this.props.currentUser,
             peoplesWhoFitCriteria: [{}],
-            text: 'test'
+            checkUser: true
+
         }
 
-        this.requestFilteringByAddress = this.requestFilteringByAddress.bind(this);
+        this.filterRequest = this.filterRequest.bind(this);
         this.userBlock=this.userBlock.bind(this);
+        this.checkAllInformationIsAvailable=this.checkAllInformationIsAvailable.bind(this);
     }
 
 
@@ -32,10 +34,29 @@ class FindNeighbor extends Component {
         console.log(this.state.peoplesWhoFitCriteria);
     };
 
-    requestFilteringByAddress(event) {
+
+    checkAllInformationIsAvailable(event) {
+        event.preventDefault();
+        this.state.userId = this.state.usernameInfo.id;
+        checkUserAvailability(this.state.userId)
+            .then(response => {
+                if(response.additionalInfoIsAvailable && response.addressIsAvailable && response.preferencesIsAvailable){
+                    this.filterRequest(event);
+                }
+                else {
+                    this.state.checkUser = false
+                }
+            });
+    }
+
+
+
+
+    filterRequest(event) {
         event.preventDefault();
 
         this.state.username = this.state.usernameInfo.name;
+        console.log(this.state.usernameInfo.id, this.state.fullAddress, this.state.age, this.state.sex);
         userFiltration(this.state.usernameInfo.id, this.state.fullAddress, this.state.age, this.state.sex)
             .then(response => {
                 if(response) {
@@ -70,17 +91,21 @@ class FindNeighbor extends Component {
     render() {
         let name;
         console.log(this.state.peoplesWhoFitCriteria)
-        if(this.state.peoplesWhoFitCriteria.length < 1){
-            name = <p>Sorry, we dont find any user</p>
+        if(!this.state.checkUser){
+            name = <p>Sorry, you have not filled everything</p>
         }
-        else{
-            name =  <ListOfNeighbor peoplesList={this.state.peoplesList} usernameInfo={this.state.usernameInfo}/>
+        else {
+            if (this.state.peoplesWhoFitCriteria.length < 1) {
+                name = <p>Sorry, we dont find any user</p>
+            } else {
+                name = <ListOfNeighbor peoplesList={this.state.peoplesList} usernameInfo={this.state.usernameInfo}/>
+            }
         }
         return (
 
             <div>
                 <div>
-                    <button onClick={this.requestFilteringByAddress.bind(this)} >
+                    <button onClick={this.checkAllInformationIsAvailable.bind(this)} >
                         Click to show modal
                     </button>
                     <br></br>

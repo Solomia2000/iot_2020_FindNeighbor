@@ -44,60 +44,26 @@ public class FilterService{
     @Autowired
     AddressDAO addressDAO;
 
-    @Transactional
-    public User findUser(Long id) {
-        User user = userDAO.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("User", "id", id)
-        );
-
-        return user;
-    }
-
-    @Transactional
-    public Address findAddress(User user) {
-        Address address = addressDAO.findByUser(user)
-                .orElseThrow(
-                () -> new UserNotFoundException("Address", "user", user)
-        );
-        return address;
-    }
-
-    @Transactional
-    public Preferences findPreferences(User user) {
-        Preferences preferences = preferencesDAO.findByUser(user)
-                .orElseThrow(
-                        () -> new UserNotFoundException("Preferences", "user", user)
-                );
-        return preferences;
-    }
-
-    @Transactional
-    public AdditionalInfo findAdditional(User user) {
-        AdditionalInfo additionalInfo = additionalInfoDAO.findByUser(user)
-                .orElseThrow(
-                        () -> new UserNotFoundException("Additional info", "user", user)
-                );
-        return additionalInfo;
-    }
-
+    @Autowired
+    CheckUserAvailabilityService checkUserAvailabilityService;
     @Transactional
     public List<User> filterByAddress(Long id) throws ResourceNotFoundException{
-        User user = findUser(id);
-        Address address = findAddress(user);
+        User user = checkUserAvailabilityService.findUser(id);
+        Address address = checkUserAvailabilityService.findAddress(user);
         List<User> users = userDAO.filterAddress(address.getCountry(), address.getCity(), user);
         return users;
     }
 
     public List<User> filterByArea(Long id){
-        User user = findUser(id);
-        Address address = findAddress(user);
+        User user = checkUserAvailabilityService.findUser(id);
+        Address address = checkUserAvailabilityService.findAddress(user);
         List<User> users = userDAO.filterArea(address.getCountry(), address.getCity(), address.getArea(), user);
         return users;
     }
 
     public List<User> filterBySex(Long id){
-        User user = findUser(id);
-        Preferences userPreferences = findPreferences(user);
+        User user = checkUserAvailabilityService.findUser(id);
+        Preferences userPreferences = checkUserAvailabilityService.findPreferences(user);
 
         List<User> users = new ArrayList<>();
         if(userPreferences.getSex() != "-") {
@@ -111,8 +77,10 @@ public class FilterService{
     }
 
     public List<User> filterByAge(Long id){
-        User user = findUser(id);
-        Preferences userPreferences = findPreferences(user);
+        User user = checkUserAvailabilityService.findUser(id);
+        Preferences userPreferences = checkUserAvailabilityService.findPreferences(user);
+        System.out.println("start age " + userPreferences.getStartAge());
+        System.out.println("end age " + userPreferences.getEndAge());
         List<User> users = userDAO.filterAge(userPreferences.getStartAge(), userPreferences.getEndAge());
         return users;
     }
@@ -149,7 +117,7 @@ public class FilterService{
         List<UserProfile> userProfiles = new ArrayList<>();
         for (int i = 0; i < usersByAddress.size(); i++){
             User user = usersByAddress.get(i);
-            AdditionalInfo additionalInfo = findAdditional(user);
+            AdditionalInfo additionalInfo = checkUserAvailabilityService.findAdditional(user);
             System.out.println("Im " + additionalInfo.getImage());
             Image userImage = getImage(additionalInfo.getImage());
             UserProfile userProfile = new UserProfile(user.getId(), user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),

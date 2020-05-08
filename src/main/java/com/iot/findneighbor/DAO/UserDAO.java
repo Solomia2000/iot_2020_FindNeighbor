@@ -29,7 +29,7 @@ public interface UserDAO extends JpaRepository<User, Long> {
     @Query("select user from AdditionalInfo where sex = ?1")
     List<User> filterSex(String sex);
 
-    @Query("SELECT a.user from AdditionalInfo a where a.age between ?1 AND ?2")
+    @Query("SELECT user from AdditionalInfo  where age between ?1 AND ?2")
     List<User> filterAge(int startAge, int endAge);
 
 }

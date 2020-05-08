@@ -106,7 +106,7 @@ export function checkEmailAvailability(email) {
 
  export function getUserAdditionalInfo(id) {
      return request({
-         url: API_BASE_URL + "/userProfileForSearching?userId=" + id,
+         url: API_BASE_URL + "/user/userProfileForSearching?userId=" + id,
          method: 'GET'
      });
  }
@@ -125,6 +125,13 @@ export function getCurrentUser() {
 export function getUserProfile(username) {
     return request({
         url: API_BASE_URL + "/users/" + username,
+        method: 'GET'
+    });
+}
+
+export function checkUserAvailability(userId) {
+    return request({
+        url: API_BASE_URL + "/user/checkUserAvailability?userId=" + userId,
         method: 'GET'
     });
 }

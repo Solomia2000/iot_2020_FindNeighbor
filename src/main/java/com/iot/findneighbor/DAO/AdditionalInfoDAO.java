@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface AdditionalInfoDAO extends JpaRepository<AdditionalInfo, Long> {
 
     Optional<AdditionalInfo> findByUser(User user);
+
+    Boolean existsByUser(User user);
 }

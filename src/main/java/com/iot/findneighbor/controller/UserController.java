@@ -4,14 +4,16 @@ import com.iot.findneighbor.DAO.AdditionalInfoDAO;
 import com.iot.findneighbor.DAO.AddressDAO;
 import com.iot.findneighbor.DAO.UserDAO;
 import com.iot.findneighbor.domain.AdditionalInfo;
-import com.iot.findneighbor.domain.Address;
 import com.iot.findneighbor.domain.User;
 import com.iot.findneighbor.exception.UserNotFoundException;
 import com.iot.findneighbor.request.FilterUserProfile;
+import com.iot.findneighbor.request.UserAllInfoAvailability;
 import com.iot.findneighbor.request.UserIdentityAvailability;
 import com.iot.findneighbor.request.UserSummary;
 import com.iot.findneighbor.security.CurrentUser;
 import com.iot.findneighbor.security.UserPrincipal;
+import com.iot.findneighbor.service.CheckUserAvailabilityService;
+import com.iot.findneighbor.service.FilterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -37,6 +38,12 @@ public class UserController {
 
     @Autowired
     AdditionalInfoDAO additionalInfoDAO;
+
+    @Autowired
+    FilterService filterService;
+
+    @Autowired
+    CheckUserAvailabilityService checkUserAvailabilityService;
 
     @Transactional
     public AdditionalInfo findAdditionalInfo(User user) {
@@ -49,7 +56,7 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @GetMapping("/user/me")
+    @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
@@ -59,17 +66,18 @@ public class UserController {
         return userSummary;
     }
 
-    @GetMapping("/user/checkUsernameAvailability")
+    @GetMapping("/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
         Boolean isAvailable = !userDAO.existsByUsername(username);
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/user/checkEmailAvailability")
+    @GetMapping("/checkEmailAvailability")
     public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
         Boolean isAvailable = !userDAO.existsByEmail(email);
         return new UserIdentityAvailability(isAvailable);
     }
+
 
     @GetMapping("/getUser")
     public User findUserByUsername(@RequestParam(value = "username") String username){
@@ -86,5 +94,13 @@ public class UserController {
         FilterUserProfile filterUserProfile = new FilterUserProfile(userId, user.getName(), additionalInfo.getAge(),
                 additionalInfo.getImage());
         return filterUserProfile;
+    }
+
+    @GetMapping("/checkUserAvailability")
+    public UserAllInfoAvailability checkUserAvailability(@RequestParam Long userId){
+        Optional<User> optionalUser = userDAO.findById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+        UserAllInfoAvailability userAllInfoAvailability = checkUserAvailabilityService.checkHasUserAllInformation(user);
+        return userAllInfoAvailability;
     }
 }
