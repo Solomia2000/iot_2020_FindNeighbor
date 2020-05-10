@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-/*.content-app{*/
-/*  padding: 110px 0 0 0;*/
-/*}*/
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -25,10 +21,6 @@
 .app-content{
   min-height: calc(100vh - 70px);
 }
-
-/*.container{*/
-/*  margin-top: 10%;*/
-/*}*/
 
 .App-link {
   color: #61dafb;
