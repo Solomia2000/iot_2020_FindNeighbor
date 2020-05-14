@@ -104,7 +104,8 @@ public class AuthController {
     }
 
     @PostMapping("signup/{username}/additionalInfo")
-    public ResponseEntity<?> registerUserAdditionalInfo(@Valid @RequestBody AdditionalInfo additionalInfoRequest, @PathVariable String username) {
+    public ResponseEntity<?> registerUserAdditionalInfo(@Valid @RequestBody AdditionalInfo additionalInfoRequest,
+                                                        @PathVariable String username) {
         System.out.println(additionalInfoRequest.getUser());
         Optional<User> optional = userDAO.findByUsername(username);
         User user = optional.isPresent() ? optional.get() : new User();

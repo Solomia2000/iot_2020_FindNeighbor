@@ -118,10 +118,8 @@ public class FilterService{
         for (int i = 0; i < usersByAddress.size(); i++){
             User user = usersByAddress.get(i);
             AdditionalInfo additionalInfo = checkUserAvailabilityService.findAdditional(user);
-            System.out.println("Im " + additionalInfo.getImage());
-            Image userImage = getImage(additionalInfo.getImage());
-            UserProfile userProfile = new UserProfile(user.getId(), user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),
-                    userImage);
+            UserProfile userProfile = new UserProfile(user.getId(), user.getName(),
+                    additionalInfo.getAge(), additionalInfo.getSex());
 
             userProfiles.add(userProfile);
         }
@@ -129,23 +127,6 @@ public class FilterService{
         return userProfiles;
     }
 
-    public Image getImage(byte[] image) throws IOException {
-//        System.out.println(image);
-//        ByteArrayInputStream bais = new ByteArrayInputStream(image);
-//        BufferedImage bImage = ImageIO.read(bais);
-//        System.out.println(bImage);
-//        return bImage;
-        System.out.println(image);
-        BufferedImage buffered_image= ImageIO.read(new File("userImage.png"));
-        ByteArrayOutputStream output_stream= new ByteArrayOutputStream();
-        ImageIO.write(buffered_image, "png", output_stream);
-        byte [] byte_array = output_stream.toByteArray();
-        ByteArrayInputStream input_stream= new ByteArrayInputStream(byte_array);
-        System.out.println("140 " + input_stream);
-        BufferedImage final_buffered_image = ImageIO.read(input_stream);
-        System.out.println("142 " + final_buffered_image);
-        ImageIO.write(final_buffered_image , "png", new File("final_file.png") );
-        System.out.println("Converted Successfully!");
-        return null;
-    }
+
+
 }

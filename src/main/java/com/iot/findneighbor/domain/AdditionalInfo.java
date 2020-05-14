@@ -28,9 +28,6 @@ public class AdditionalInfo {
     private boolean haveJobOrJobless;
     private String moreAboutUser;
 
-    @Lob @JsonProperty("image")
-    private byte[] image;
-
     @OneToOne
     @JoinColumn(referencedColumnName = "id")
     private User user;

@@ -15,16 +15,13 @@ public class UserProfile {
     private String name;
     private int age;
     private String sex;
-    @Lob
-    @JsonProperty("image")
-    private Image image;
 
-    public UserProfile(Long id, String name, int age, String sex, Image image) {
+    public UserProfile(Long id, String name, int age, String sex) {
         this.id=id;
         this.name=name;
         this.age=age;
         this.sex=sex;
-        this.image=image;
+
     }
 
 }

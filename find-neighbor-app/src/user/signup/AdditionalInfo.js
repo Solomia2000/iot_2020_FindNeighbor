@@ -22,8 +22,7 @@ class AdditionalInfo extends Component {
             moreAboutUser: '',
             userId: this.props.match.params,
             handleDateChange: '',
-            age: 0,
-            imagePreviewUrl: ''
+            age: 0
 
         }
         this.profilePictureRef = React.createRef();
@@ -103,18 +102,7 @@ class AdditionalInfo extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const data = this.state.imagePreviewUrl.split(',')[1];
-        let raw = window.btoa(data);
-        let rawLength = raw.length;
-        let array = new Uint8Array(new ArrayBuffer(rawLength));
-        for(let i = 0; i < rawLength; i++){
-            array[i] = raw.charCodeAt(i);
-        }
 
-        let picture = [];
-        for(let i = 0; i < rawLength; i++){
-            picture.push(array[i]);
-        }
         this.state.age = getAge(this.state.selectedDate)
         console.log(this.state.age);
         const additionalInfoRequest = {
@@ -126,9 +114,7 @@ class AdditionalInfo extends Component {
             sex: this.state.sex,
             moreAboutUser: this.state.moreAboutUser,
             userId: this.state.userId,
-            age: this.state.age,
-            image: picture
-
+            age: this.state.age
         };
 
         let username = this.state.userId;
@@ -174,13 +160,6 @@ class AdditionalInfo extends Component {
         render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>image</label>
-                    <div>
-                        <input type="file" onChange={(e)=>this.handleImageChange} />
-                    </div>
-
-                </div>
                 <h4>Set your age</h4>
                 <p> The date you've selected is: {this.state.selectedDate.format('YYYY-MM-DD')} </p>
                 <Calendar date={moment("23/09/1999", "DD/MM/YYYY")} onSelect={this.onSelect} />

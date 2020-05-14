@@ -6,9 +6,9 @@ import com.iot.findneighbor.DAO.UserDAO;
 import com.iot.findneighbor.domain.AdditionalInfo;
 import com.iot.findneighbor.domain.User;
 import com.iot.findneighbor.exception.UserNotFoundException;
-import com.iot.findneighbor.request.FilterUserProfile;
 import com.iot.findneighbor.request.UserAllInfoAvailability;
 import com.iot.findneighbor.request.UserIdentityAvailability;
+import com.iot.findneighbor.request.UserProfile;
 import com.iot.findneighbor.request.UserSummary;
 import com.iot.findneighbor.security.CurrentUser;
 import com.iot.findneighbor.security.UserPrincipal;
@@ -87,13 +87,12 @@ public class UserController {
     }
 
     @GetMapping("/userProfileForSearching")
-    public FilterUserProfile findAdditionalInfoByUserId(@RequestParam Long userId){
+    public UserProfile findAdditionalInfoByUserId(@RequestParam Long userId){
         Optional<User> optionalUser = userDAO.findById(userId);
         User user = optionalUser.isPresent() ? optionalUser.get() : new User();
         AdditionalInfo additionalInfo = findAdditionalInfo(user);
-        FilterUserProfile filterUserProfile = new FilterUserProfile(userId, user.getName(), additionalInfo.getAge(),
-                additionalInfo.getImage());
-        return filterUserProfile;
+        UserProfile userProfile = new UserProfile(userId, user.getName(), additionalInfo.getAge(), additionalInfo.getSex());
+        return userProfile;
     }
 
     @GetMapping("/checkUserAvailability")
