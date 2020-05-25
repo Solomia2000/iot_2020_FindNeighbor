@@ -23,6 +23,7 @@ import Filters from "../user/signup/Filters";
 import AdditionalInfo from "../user/signup/AdditionalInfo";
 import FindNeighbor from "../components/FindNeighbor";
 import Footer from '../components/Footer/Footer';
+import UserImage from "../user/signup/UserImage";
 const { Content } = Layout;
 
 class App extends Component {
@@ -122,6 +123,9 @@ class App extends Component {
                                 <Route
                                     //  currentUser={this.state.currentUser}
                                     path="/:username/additionalInfo" component={AdditionalInfo}></Route>
+                                <Route
+                                    //  currentUser={this.state.currentUser}
+                                    path="/:username/userImage" component={UserImage}></Route>
                                 <Route
                                     //  currentUser={this.state.currentUser}
                                     path="/:username/filters" component={Filters}></Route>

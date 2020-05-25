@@ -54,6 +54,19 @@ export function additionalInfo(additionalInfoRequest, username) {
     });
 }
 
+export function userImageRequest(userImageRequest, username) {
+
+    return request({
+
+        url: API_BASE_URL + "/auth/signup/"+
+            Object.values(username)
+            +"/userImage",
+        method: 'POST',
+        body: JSON.stringify(userImageRequest)
+
+    });
+}
+
 export function filterRequest(filterRequest, username) {
     return request({
 

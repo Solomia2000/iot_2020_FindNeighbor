@@ -3,11 +3,9 @@ package com.iot.findneighbor.controller;
 import com.iot.findneighbor.DAO.*;
 import com.iot.findneighbor.domain.*;
 import com.iot.findneighbor.exception.AppException;
-import com.iot.findneighbor.request.ApiResponse;
-import com.iot.findneighbor.request.JwtAuthenticationResponse;
-import com.iot.findneighbor.request.LoginRequest;
-import com.iot.findneighbor.request.SignUpRequest;
+import com.iot.findneighbor.request.*;
 import com.iot.findneighbor.security.JwtTokenProvider;
+import com.iot.findneighbor.service.AuthService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
@@ -52,8 +52,15 @@ public class AuthController {
 
     @Autowired
     AdditionalInfoDAO additionalInfoDAO;
+
+    @Autowired
+    UserImageDAO userImageDAO;
+
     @Autowired
     PreferencesDAO filtersDAO;
+
+    @Autowired
+    AuthService authService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -114,9 +121,29 @@ public class AuthController {
         User userToGetUsername = additionalInfo.getUser();
         String userId = userToGetUsername.getUsername();
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/signup/{username}/filters")
+                .fromCurrentContextPath().path("/signup/{username}/userImage")
                 .buildAndExpand(userId).toUri();
-    return ResponseEntity.created(location).body(new ApiResponse(true, "Your preferences registered successfully"));
+    return ResponseEntity.created(location).body(new ApiResponse(true, "Additional Info registered successfully"));
+
+    }
+
+    @RequestMapping (value = "signup/{username}/userImage", method = RequestMethod.POST,
+            consumes = {"multipart/form-data"})
+    public ResponseEntity<?> registerUserImage(@Valid @ModelAttribute UserImageRequest userImageRequest,
+                                                        @PathVariable String username) throws IOException {
+        //System.out.println(userImageRequest.getUser());
+        Optional<User> optional = userDAO.findByUsername(username);
+        User user = optional.isPresent() ? optional.get() : new User();
+        System.out.println("User id " + userImageRequest.getImage());
+
+        String destination = "/images/" + username + "/"  + userImageRequest.getImage().getOriginalFilename();
+      //  File file = new File(destination);
+        authService.createFileFOrStoreImage(username, userImageRequest.getImage());
+        //userImageRequest.getImage().transferTo(file);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/signup/{username}/filters")
+                .buildAndExpand(username).toUri();
+        return ResponseEntity.created(location).body(new ApiResponse(true, "User image registered successfully"));
 
     }
 
@@ -131,7 +158,7 @@ public class AuthController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/signup/{username}/address")
                 .buildAndExpand(userId).toUri();
-        return ResponseEntity.created(location).body(new ApiResponse(true, "Additional info registered successfully"));
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Preferences registered successfully"));
     }
 
     @PostMapping("/signup/{username}/address")

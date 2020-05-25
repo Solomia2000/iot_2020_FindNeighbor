@@ -125,7 +125,7 @@ class AdditionalInfo extends Component {
                     message: 'Find Neighbor App',
                     description: "Thank you! You're successfully registered. Please set your additional info!",
                 });
-                this.props.history.push("/"+Object.values(username)+"/filters");
+                this.props.history.push("/"+Object.values(username)+"/userImage");
             }).catch(error => {
             notification.error({
                 message: 'Find Neighbor App',
