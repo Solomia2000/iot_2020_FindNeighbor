@@ -15,3 +15,29 @@
     height: 70px;
 }
 
+.find-button {
+    position: absolute;
+    width: 20%;
+    height: 7%;
+    left: 74%;
+    top: 18%;
+
+    border-color: #EA2626;
+    color: #f0f1f2;
+    background: #EA2626;
+    border-radius: 3px;
+}
+
+.fullAddress {
+    position: absolute;
+    width: 20%;
+    height: 12%;
+    left: 8%;
+    top: 18%;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12%;
+    line-height: 14%;
+    color: #152046;
+}

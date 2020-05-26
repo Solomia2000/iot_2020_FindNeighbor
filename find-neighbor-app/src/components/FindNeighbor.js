@@ -105,11 +105,11 @@ class FindNeighbor extends Component {
 
             <div>
                 <div>
-                    <button onClick={this.checkAllInformationIsAvailable.bind(this)} >
+                    <button className="find-button" onClick={this.checkAllInformationIsAvailable.bind(this)} >
                         Click to show modal
                     </button>
                     <br></br>
-                    <label>
+                    <label className="fullAdress">
                         <input type="checkbox"
                                checked={this.state.fullAddress}
                                onChange={this.toggleChangeFullAddress}
