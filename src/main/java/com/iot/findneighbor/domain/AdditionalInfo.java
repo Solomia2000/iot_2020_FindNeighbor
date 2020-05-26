@@ -26,6 +26,7 @@ public class AdditionalInfo {
     private String maritalStatus;
     private int age;
     private boolean haveJobOrJobless;
+    private String phoneNumber;
     private String moreAboutUser;
 
     @OneToOne

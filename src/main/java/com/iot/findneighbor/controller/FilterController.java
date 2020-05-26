@@ -34,8 +34,6 @@ public class FilterController {
     public List<UserProfile> filteringByPreference(@RequestParam Long id, @RequestParam  Boolean fullAddress, @RequestParam Boolean sex,
                                                    @RequestParam Boolean age) throws IOException {
         List<User> usersByAddress = new ArrayList<>();
-        List <User> usersBySex = new ArrayList<>();
-        List <User> usersByAge = new ArrayList<>();
         System.out.println(usersByAddress.size());
         System.out.println("Full adreess " + fullAddress);
         System.out.println("Age " + age);

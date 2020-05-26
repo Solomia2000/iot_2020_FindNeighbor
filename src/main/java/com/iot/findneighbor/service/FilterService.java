@@ -119,7 +119,7 @@ public class FilterService{
             User user = usersByAddress.get(i);
             AdditionalInfo additionalInfo = checkUserAvailabilityService.findAdditional(user);
             UserProfile userProfile = new UserProfile(user.getId(), user.getName(),
-                    additionalInfo.getAge(), additionalInfo.getSex());
+                    additionalInfo.getAge(), additionalInfo.getSex(), additionalInfo.getPhoneNumber());
 
             userProfiles.add(userProfile);
         }

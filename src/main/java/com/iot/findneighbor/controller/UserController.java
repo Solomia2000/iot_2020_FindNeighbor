@@ -91,7 +91,8 @@ public class UserController {
         Optional<User> optionalUser = userDAO.findById(userId);
         User user = optionalUser.isPresent() ? optionalUser.get() : new User();
         AdditionalInfo additionalInfo = findAdditionalInfo(user);
-        UserProfile userProfile = new UserProfile(userId, user.getName(), additionalInfo.getAge(), additionalInfo.getSex());
+        UserProfile userProfile = new UserProfile(userId, user.getName(), additionalInfo.getAge(), additionalInfo.getSex(),
+                additionalInfo.getPhoneNumber());
         return userProfile;
     }
 

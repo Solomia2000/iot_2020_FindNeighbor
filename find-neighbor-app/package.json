@@ -14,6 +14,8 @@
     "react-calendar-pane": "^1.0.4",
     "react-dev-utils": "^10.0.0",
     "react-dom": "^16.12.0",
+    "react-phone-input-2": "^2.13.5",
+    "react-phone-number-input": "^3.0.23",
     "react-scripts": "3.4.0"
   },
   "scripts": {

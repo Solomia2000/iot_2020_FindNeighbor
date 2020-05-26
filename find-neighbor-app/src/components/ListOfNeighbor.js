@@ -46,7 +46,7 @@ function Item({ item }) {
     return (
        <div className="userBlock">
            <img className="profileImage" src={profileImage}/>
-           <b> Name:</b> {item.name} <b>Age:</b> {item.age}
+           <b> Name:</b> {item.name} <b>Age:</b> {item.age} <b>Phone number:</b> {item.phoneNumber}
            <div>
 
            </div>

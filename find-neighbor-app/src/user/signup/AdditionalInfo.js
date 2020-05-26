@@ -4,6 +4,10 @@ import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import Calendar from 'react-calendar-pane';
 import moment, { calendarFormat } from 'moment';
+import ReactPhoneInput from "react-phone-input-2";
+import "./Signup.css";
+
+
 import date from 'react-calendar-pane';
 
 class AdditionalInfo extends Component {
@@ -22,7 +26,8 @@ class AdditionalInfo extends Component {
             moreAboutUser: '',
             userId: this.props.match.params,
             handleDateChange: '',
-            age: 0
+            age: 0,
+            phone: ''
 
         }
         this.profilePictureRef = React.createRef();
@@ -35,7 +40,7 @@ class AdditionalInfo extends Component {
         this.handleChangeSex = this.handleChangeSex.bind(this);
         this.handleChangeJobOrJobless = this.handleChangeJobOrJobless.bind(this);
         this.handleChangeMoreAboutUser = this.handleChangeMoreAboutUser.bind(this);
-
+        this.handlePhoneNumber = this.handlePhoneNumber.bind(this);
     }
 
     onSelect=(e)=>{
@@ -89,6 +94,13 @@ class AdditionalInfo extends Component {
         // console.log(this.state.badHabits);
     }
 
+    handlePhoneNumber = value => {
+        console.log(value);
+        this.setState({ phone: value }, () => {
+            console.log(this.state.phone);
+        });
+    };
+
     handleImageChange(e){
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -114,7 +126,8 @@ class AdditionalInfo extends Component {
             sex: this.state.sex,
             moreAboutUser: this.state.moreAboutUser,
             userId: this.state.userId,
-            age: this.state.age
+            age: this.state.age,
+            phoneNumber: this.state.phone
         };
 
         let username = this.state.userId;
@@ -125,7 +138,7 @@ class AdditionalInfo extends Component {
                     message: 'Find Neighbor App',
                     description: "Thank you! You're successfully registered. Please set your additional info!",
                 });
-                this.props.history.push("/"+Object.values(username)+"/userImage");
+                this.props.history.push("/"+Object.values(username)+"/filters");
             }).catch(error => {
             notification.error({
                 message: 'Find Neighbor App',
@@ -164,7 +177,7 @@ class AdditionalInfo extends Component {
                 <p> The date you've selected is: {this.state.selectedDate.format('YYYY-MM-DD')} </p>
                 <Calendar date={moment("23/09/1999", "DD/MM/YYYY")} onSelect={this.onSelect} />
                 <FormItem>
-                <p>Do you have some bad habits?</p>
+                <b>Do you have some bad habits?</b>
                 <ul>
                     <li>
                         <label>
@@ -193,7 +206,7 @@ class AdditionalInfo extends Component {
                 </FormItem>
 
                 <FormItem>
-                    <p>Kind of activity</p>
+                    <b>Kind of activity</b>
 
                     <ul>
                         <li>
@@ -223,7 +236,7 @@ class AdditionalInfo extends Component {
                     </ul>
                 </FormItem>
                 <FormItem>
-                    <p>Are you working?</p>
+                    <b>Are you working?</b>
 
                     <ul>
                         <li>
@@ -254,7 +267,7 @@ class AdditionalInfo extends Component {
                 </FormItem>
 
                 <FormItem>
-                    <p>Gender</p>
+                    <b>Gender</b>
 
                     <ul>
                         <li>
@@ -284,7 +297,7 @@ class AdditionalInfo extends Component {
                     </ul>
                 </FormItem>
                 <FormItem>
-                    <p>Marital status</p>
+                    <b>Marital status</b>
 
                     <ul>
                         <li>
@@ -327,7 +340,7 @@ class AdditionalInfo extends Component {
                 </FormItem>
 
                 <FormItem>
-                    <p>Do you have some pets?</p>
+                    <b>Do you have some pets?</b>
                     <i>If yes you can write more in "more about yourself"</i>
 
                     <ul>
@@ -358,17 +371,27 @@ class AdditionalInfo extends Component {
 
                     </ul>
                 </FormItem>
-                <FormItem
-                    label="More About User"
-                    hasFeedback
-                  //  validateStatus={this.state.email.validateStatus}
-                 //   help={this.state.email.errorMsg}
-                    >
+                <div className='phoneNumberStyle'>
+                    <b>Phone number:</b>
+                    <ReactPhoneInput
+                        inputExtraProps={{
+                            name: "phone",
+                            required: true,
+                            autoFocus: true
+                        }}
+                        defaultCountry={"sg"}
+                        value={this.state.phone}
+                        onChange={this.handlePhoneNumber}
+                    />
+                </div>
+                <FormItem>
+                <b> More about yourself</b>
                     <Input
                         size="large"
                         name="moreAboutUser"
                         autoComplete="off"
-                        placeholder="Here you can tell more about yourself. Please, write here about your bad habits, if you have any. And more about your pets."
+                        placeholder="Here you can tell more about yourself.
+                        Please, write here about your bad habits, if you have any. And more about your pets."
                         value={this.state.moreAboutUser}
                        // onBlur={this.validateEmailAvailability}
                        onChange={(event) => this.handleChangeMoreAboutUser(event) }
