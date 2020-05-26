@@ -2,10 +2,15 @@ import { Button } from 'antd';
 import './MainPage.css';
 import join from './main.png';
 import React, {Component} from "react";
+import Rewievs from "./rewievs";
+import { Card } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import black from './black.png';
 import people from './people.png';
 
-class Grid extends Component {
+class MainPage extends Component {
     constructor(props, context) {
         super(props, context);
     }
@@ -25,7 +30,7 @@ class Grid extends Component {
                 <Button className="join-us" block onClick={(e) => this.onclick(e)}>Join us</Button>
 
 
-
+               <Rewievs />
                 {/*<img className="people" src={people}/>*/}
 
             </div>
@@ -50,4 +55,4 @@ class Grid extends Component {
 {/*</div>*/}
 {/* */}
 
-export default Grid
+export default MainPage

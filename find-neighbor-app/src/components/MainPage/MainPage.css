@@ -15,7 +15,7 @@
     width: 233px;
     height: 60px;
     left: 50%;
-    top: 50%;
+    top: 60%;
     cursor: pointer;
     background: #EA2626;
     transform: translate(-50%, -50%);
@@ -33,29 +33,141 @@
 
 .text {
     position: absolute;
-    width: 800px;
-    height: 96px;
-    left: 370px;
-    top: 100px;
+    width: 80%;
+    height: 65%;
+    left: 11%;
+    top: 15%;
     font-style: normal;
     font-weight: bold;
-    font-size: 70px;
-    line-height: 82px;
+    font-size: 310%;
+    line-height: 90%;
     text-align: center;
     color: #FFFFFF;
 }
 
 .sub-text {
     position: absolute;
-    width: 413px;
-    height: 26px;
-    left: 560px;
-    top: 250px;
+    width: 70%;
+    height: 55%;
+    left: 17%;
+    top: 34%;
     font-style: normal;
     font-weight: normal;
-    font-size: 22px;
-    line-height: 26px;
+    font-size: 180%;
+    line-height: 40%;
     text-align: center;
     color: #FFFFFF;
 }
 
+/*.box-for-rewievs {
+    position: absolute;
+    width: 100px;
+    height: 29px;
+    left: 551px;
+    top: 1163px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+
+    color: #152046;
+}*/
+
+.first {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 10%;
+    top: 80%;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.second {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 38%;
+    top: 80%;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.third {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 64%;
+    top: 80%;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.people {
+    position: relative;
+    width: 40%;
+    height: 40%;
+    left: 57%;
+    top: 23%;
+}
+
+.about-title {
+    position: absolute;
+    width: 25%;
+    height: 41px;
+    left: 14%;
+    top: 120%;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 41px;
+
+    color: #152046;
+}
+
+.about-text {
+    position: absolute;
+    width: 418px;
+    height: 110px;
+    left: 14%;
+    top: 130%;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #797A7E;
+}
+
+.about-button {
+    position: absolute;
+    border-radius: 6px;
+    border: none;
+    color: #FFFFFF;
+    font-size: 24px;
+    transition: 250ms ease;
+    font-weight: bold;
+    width: 233px;
+    height: 60px;
+    left: 22%;
+    top: 150%;
+    cursor: pointer;
+    background: #EA2626;
+    transform: translate(-50%, -50%);
+}
+
+.about-button:hover {
+    background: white;
+    color: #EA2626;
+    box-shadow: 0 4px 12px rgba(168, 31 ,74, 0.15);
+}
+
+.about-button:focus {
+    outline:0;
+}
