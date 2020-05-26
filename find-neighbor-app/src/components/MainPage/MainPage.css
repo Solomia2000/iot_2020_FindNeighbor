@@ -59,89 +59,36 @@
     color: #FFFFFF;
 }
 
-/*.box-for-rewievs {
-    position: absolute;
-    width: 100px;
-    height: 29px;
-    left: 551px;
-    top: 1163px;
-
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 29px;
-    text-align: center;
-
-    color: #152046;
-}*/
-
-.first {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 10%;
-    top: 80%;
-
-    background: #FFFFFF;
-    border-radius: 10px;
-}
-
-.second {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 38%;
-    top: 80%;
-
-    background: #FFFFFF;
-    border-radius: 10px;
-}
-
-.third {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 64%;
-    top: 80%;
-
-    background: #FFFFFF;
-    border-radius: 10px;
-}
-
 .people {
     position: relative;
     width: 40%;
     height: 40%;
     left: 57%;
-    top: 23%;
 }
 
 .about-title {
     position: absolute;
     width: 25%;
-    height: 41px;
+    height: 70%;
     left: 14%;
     top: 120%;
-
     font-style: normal;
     font-weight: bold;
-    font-size: 35px;
-    line-height: 41px;
-
+    font-size: 240%;
+    line-height: 240%;
     color: #152046;
 }
 
 .about-text {
     position: absolute;
-    width: 418px;
-    height: 110px;
+    width: 35%;
+    height: 40%;
     left: 14%;
     top: 130%;
-
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 110%;
+    line-height: 140%;
     color: #797A7E;
 }
 
@@ -170,4 +117,71 @@
 
 .about-button:focus {
     outline:0;
+}
+
+.rewievs {
+    position: relative;
+    width: 30%;
+    height: 80%;
+    left: 33%;
+    top: 10%;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 230%;
+    line-height: 90%;
+    text-align: center;
+
+    color: #152046;
+}
+
+.first {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 105%;
+    top: 10%;
+
+    border-color: #152046;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.second {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 140%;
+    top: 10%;
+    background: #FFFFFF;
+}
+
+.third {
+    position: relative;
+    width: 30%;
+    height: 27%;
+    left: 175%;
+    top: 10%;
+    background: #FFFFFF;
+}
+
+.girlF {
+    position: relative;
+    width: 10%;
+    height: 10%;
+    left: 95%;
+}
+
+.girlS {
+    position: relative;
+    width: 10%;
+    height: 10%;
+    left: 130%;
+}
+
+.boy {
+    position: relative;
+    width: 10%;
+    height: 10%;
+    left: 165%;
 }
