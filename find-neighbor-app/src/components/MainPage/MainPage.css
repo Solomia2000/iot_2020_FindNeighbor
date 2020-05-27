@@ -34,7 +34,6 @@
 .text {
     position: absolute;
     width: 80%;
-    height: 65%;
     left: 11%;
     top: 15%;
     font-style: normal;
@@ -48,7 +47,6 @@
 .sub-text {
     position: absolute;
     width: 70%;
-    height: 55%;
     left: 17%;
     top: 34%;
     font-style: normal;
@@ -64,6 +62,10 @@
     width: 40%;
     height: 40%;
     left: 57%;
+}
+
+.about-project{
+    margin-top: 300px;
 }
 
 .about-title {
@@ -119,69 +121,26 @@
     outline:0;
 }
 
-.rewievs {
+.reviews {
     position: relative;
-    width: 30%;
-    height: 80%;
-    left: 33%;
-    top: 10%;
-
+    margin-top: 50px ;
     font-style: normal;
     font-weight: bold;
     font-size: 230%;
     line-height: 90%;
     text-align: center;
-
     color: #152046;
 }
 
 .first {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 105%;
-    top: 10%;
-
-    border-color: #152046;
     background: #FFFFFF;
-    border-radius: 10px;
+    text-align: center;
 }
 
-.second {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 140%;
-    top: 10%;
-    background: #FFFFFF;
+
+.reviews-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px 0 50px 0;
 }
 
-.third {
-    position: relative;
-    width: 30%;
-    height: 27%;
-    left: 175%;
-    top: 10%;
-    background: #FFFFFF;
-}
-
-.girlF {
-    position: relative;
-    width: 10%;
-    height: 10%;
-    left: 95%;
-}
-
-.girlS {
-    position: relative;
-    width: 10%;
-    height: 10%;
-    left: 130%;
-}
-
-.boy {
-    position: relative;
-    width: 10%;
-    height: 10%;
-    left: 165%;
-}

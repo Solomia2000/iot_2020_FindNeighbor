@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import './MainPage.css';
 import join from './main.png';
 import React, {Component} from "react";
-import Rewievs from "./rewievs";
+import Rewievs from "./Rewievs";
 import Container from 'react-bootstrap/Container';
 import black from './black.png';
 import Row from 'react-bootstrap/Row';
@@ -27,7 +27,13 @@ class MainPage extends Component {
                 <p className="sub-text">The social network for your neighborhood.</p>
 
                 <Button className="join-us" block onClick={(e) => this.onclick(e)}>Join us</Button>
-                <Container> <Row><div className="rewievs">Rewievs</div></Row></Container>
+
+                <Container>
+                    <Row>
+                        <div className="reviews">Reviews</div>
+                    </Row>
+                </Container>
+
                <Rewievs />
                 {/*<img className="people" src={people}/>*/}
 
