@@ -35,28 +35,9 @@ class MainPage extends Component {
                 </Container>
 
                <Rewievs />
-                {/*<img className="people" src={people}/>*/}
-
             </div>
         );
     }
 }
-
-
-{/*<div className="main-picture">*/}
-{/*                <img className="join" src={join}/>*/}
-
-{/*                /!*<img className="black" src={black}/>*!/*/}
-
-{/*<Button className="joinUs" block onClick={(e) => this.onclick(e)}>Join us</Button>*/}
-
-{/*<p className="text">Find neighbor</p>*/}
-
-{/*<p className="stext">The social network for your neighborhood.</p>*/}
-
-{/*/!*<img className="people" src={people}/>*!/*/}
-
-{/*</div>*/}
-{/* */}
 
 export default MainPage

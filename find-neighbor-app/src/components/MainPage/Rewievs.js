@@ -1,8 +1,4 @@
 import React, {Component} from "react";
-import { Table } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import people from "./people.png";
 import {Button} from "antd";
 import boy from "./boy.png";
@@ -11,12 +7,6 @@ import girlS from "./girlS.png";
 
 
 class Rewievs extends Component {
-
-    //Навіщо воно тут???
-
-    // constructor(props, context) {
-    //     super(props, context);
-    // }
 
     onclick () {
         window.location.assign('../login');
@@ -40,20 +30,32 @@ class Rewievs extends Component {
                         <div className="first">Valera</div>
                     </div>
                 </div>
-                {/*TODO: make this grid*/}
-                {/*<div className="about-project">*/}
-                {/*    <div>*/}
-                {/*        <div className="about-title">*/}
-                {/*            About our project*/}
-                {/*        </div>*/}
-                {/*        <div className="about-text">*/}
-                {/*            Our project wants to help each of you who is looking for the perfect*/}
-                {/*            roommate to live in a shared apartment.*/}
-                {/*        </div>*/}
-                {/*        <Button className="about-button" block onClick={(e) => this.onclick(e)}>Join</Button>*/}
-                {/*        <img className="people" src={people}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div className="about-project">
+                        {/*<div className="about-title">*/}
+                        {/*    About our project*/}
+                        {/*</div>*/}
+                        {/*<div className="about-text">*/}
+                        {/*    Our project wants to help each of you who is looking for the perfect*/}
+                        {/*    roommate to live in a shared apartment.*/}
+                        {/*    <Button className="about-button" block onClick={(e) => this.onclick(e)}>Join</Button>*/}
+                        {/*</div>*/}
+
+                        {/*<img className="people" src={people}/>*/}
+                    <div className="item1">
+                        <p className="about-title">About our project</p>
+                        <p className="about-text">
+                            Our project wants to help each of you who is looking for the perfect
+                            roommate to live in a shared apartment.
+                        </p>
+                    </div>
+                    <div className="item2">
+                        <img className="people" src={people}/>
+                    </div>
+                    <div className="item3">
+                        <button className="about-button" block onClick={(e) => this.onclick(e)}>Join</button>
+                    </div>
+
+                </div>
             </div>
         )
     }
