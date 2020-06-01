@@ -6,9 +6,7 @@ import Calendar from 'react-calendar-pane';
 import moment, { calendarFormat } from 'moment';
 import ReactPhoneInput from "react-phone-input-2";
 import "./Signup.css";
-
-
-import date from 'react-calendar-pane';
+import "./AdditionalInfo.css"
 
 class AdditionalInfo extends Component {
     constructor(props) {
@@ -24,7 +22,7 @@ class AdditionalInfo extends Component {
             pets: false,
             sex: '',
             moreAboutUser: '',
-            userId: this.props.match.params,
+            userId: this.props.match.params,//.params
             handleDateChange: '',
             age: 0,
             phone: ''
@@ -132,7 +130,7 @@ class AdditionalInfo extends Component {
 
         let username = this.state.userId;
 
-        additionalInfo(additionalInfoRequest, this.props.match.params)
+        additionalInfo(additionalInfoRequest, this.props.match.params)//.params
             .then(response => {
                 notification.success({
                     message: 'Find Neighbor App',
@@ -172,207 +170,212 @@ class AdditionalInfo extends Component {
 
         render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h4>Set your age</h4>
-                <p> The date you've selected is: {this.state.selectedDate.format('YYYY-MM-DD')} </p>
-                <Calendar date={moment("23/09/1999", "DD/MM/YYYY")} onSelect={this.onSelect} />
-                <FormItem>
-                <b>Do you have some bad habits?</b>
-                <ul>
+            <form className="info-wrap" onSubmit={this.handleSubmit}>
+                <h4 className="center">Set your age</h4>
+                <p className="center"> The date you've selected is: {this.state.selectedDate.format('YYYY-MM-DD')} </p>
+                <div className="calendar">
+                    <Calendar className="calendar" date={moment("23/09/1999", "DD/MM/YYYY")} onSelect={this.onSelect} />
+                </div>
+                
+                <FormItem className="checkbox-container">
+                <h4 className="center">Do you have some bad habits?</h4>
+                <ul className="checkbox-list">
                     <li>
                         <label>
+                            <p>Yes</p>
                             <input
                                 type="radio"
                                 value="true"
                                 checked={this.state.badHabits === "true"}
                                 onChange={this.handleChangeBadHabits}
                             />
-                            Yes
                         </label>
                     </li>
 
                     <li>
                         <label>
+                            <p>No</p>
                             <input
                                 type="radio"
                                 value="false"
                                 checked={this.state.badHabits === "false"}
                                 onChange={this.handleChangeBadHabits}
                             />
-                            No
                         </label>
                     </li>
                 </ul>
                 </FormItem>
 
-                <FormItem>
-                    <b>Kind of activity</b>
-
-                    <ul>
+                <FormItem className="checkbox-container">
+                    <h4 className="center">Kind of activity</h4>
+                    <ul className="checkbox-list">
                         <li>
-                            <label>
+                            <label className="checkbox">
+                                <p>I am a student</p>
                                 <input
                                     type="radio"
                                     value="false"
                                     checked={this.state.kindOfActivity === "false"}
                                     onChange={this.handleChangeKindOfActivity}
                                 />
-                                I am a student
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>I graduated from university/college</p>
                                 <input
                                     type="radio"
                                     value="true"
                                     checked={this.state.kindOfActivity === "true"}
                                     onChange={this.handleChangeKindOfActivity}
                                 />
-                                I graduated from university/college
                             </label>
                         </li>
 
                     </ul>
                 </FormItem>
-                <FormItem>
-                    <b>Are you working?</b>
-
-                    <ul>
+                <FormItem className="checkbox-container">
+                    <h4 className="center">Are you working?</h4>
+                    <ul className="checkbox-list">
                         <li>
                             <label>
+                                <p>Yes</p>
                                 <input
                                     type="radio"
                                     value="true"
                                     checked={this.state.jobOrJobless === "true"}
                                     onChange={this.handleChangeJobOrJobless}
                                 />
-                                Yes
+
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>No</p>
                                 <input
                                     type="radio"
                                     value="false"
                                     checked={this.state.jobOrJobless === "false"}
                                     onChange={this.handleChangeJobOrJobless}
                                 />
-                                No
+
                             </label>
                         </li>
-
                     </ul>
                 </FormItem>
 
-                <FormItem>
-                    <b>Gender</b>
-
-                    <ul>
+                <FormItem className="checkbox-container">
+                    <h4 className="center">Gender</h4>
+                    <ul className="checkbox-list">
                         <li>
                             <label>
+                                <p>Male</p>
                                 <input
                                     type="radio"
                                     value="man"
                                     checked={this.state.sex === "man"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Man
+
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>Female</p>
                                 <input
                                     type="radio"
                                     value="woman"
                                     checked={this.state.sex === "woman"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Woman
+
                             </label>
                         </li>
-
                     </ul>
                 </FormItem>
-                <FormItem>
-                    <b>Marital status</b>
 
-                    <ul>
+                <FormItem className="checkbox-container">
+                    <h4 className="center">Marital status</h4>
+                    <ul className="checkbox-list">
                         <li>
                             <label>
+                                <p>Single</p>
                                 <input
                                     type="radio"
                                     value="single"
                                     checked={this.state.maritalStatus === "single"}
                                     onChange={this.handleChangeMaritalStatus}
                                 />
-                                Single
+
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>Married</p>
                                 <input
                                     type="radio"
                                     value="married"
                                     checked={this.state.maritalStatus === "married"}
                                     onChange={this.handleChangeMaritalStatus}
                                 />
-                                Married
+
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>In the relationship</p>
                                 <input
                                     type="radio"
                                     value="in the relationship"
                                     checked={this.state.maritalStatus === "in the relationship"}
                                     onChange={this.handleChangeMaritalStatus}
                                 />
-                                In the relationship
+
                             </label>
                         </li>
 
                     </ul>
                 </FormItem>
 
-                <FormItem>
-                    <b>Do you have some pets?</b>
-                    <i>If yes you can write more in "more about yourself"</i>
-
-                    <ul>
-
+                <FormItem className="checkbox-container">
+                    <h4 className="center">Do you have some pets?</h4>
+                    {/*<p className="center">If yes you can write more in "more about yourself"</p>*/}
+                    <ul className="checkbox-list">
                         <li>
                             <label>
+                                <p>Yes</p>
                                 <input
                                     type="radio"
                                     value="true"
                                     checked={this.state.pets === "true"}
                                     onChange={this.handleChangePets}
                                 />
-                                Yes
+
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>No</p>
                                 <input
                                     type="radio"
                                     value="false"
                                     checked={this.state.pets === "false"}
                                     onChange={this.handleChangePets}
                                 />
-                                No
+
                             </label>
                         </li>
 
                     </ul>
                 </FormItem>
-                <div className='phoneNumberStyle'>
-                    <b>Phone number:</b>
+                <div className='center'>
+                    <h4>Phone number:</h4>
                     <ReactPhoneInput
                         inputExtraProps={{
                             name: "phone",
@@ -384,8 +387,8 @@ class AdditionalInfo extends Component {
                         onChange={this.handlePhoneNumber}
                     />
                 </div>
-                <FormItem>
-                <b> More about yourself</b>
+                <FormItem className="checkbox-container">
+                <h4 className="center"> More about yourself</h4>
                     <Input
                         size="large"
                         name="moreAboutUser"
@@ -398,7 +401,7 @@ class AdditionalInfo extends Component {
                      />
                 </FormItem>
 
-                <button type="submit">Ok</button>
+                <button className="checkbox-form-button" type="submit">Ok</button>
             </form>
         );
     }
