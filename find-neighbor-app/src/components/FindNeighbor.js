@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './FindNeighbor.css';
 import {getUserAdditionalInfo, getUserProfile, userFiltration, checkUserAvailability} from "../util/APIUtils";
 import ListOfNeighbor from "./ListOfNeighbor";
+import { Card } from 'antd';
 class FindNeighbor extends Component {
     constructor(props) {
         super(props);
@@ -22,9 +23,13 @@ class FindNeighbor extends Component {
 
 
     userBlock = () =>  {
-        return(<div className="userBlock">
+        return(/*<div className="site-card-border-less-wrapper">
+            <Card title="Card title" bordered={false} style={{ width: 300 }}>*/
+            <div className="userBlock">
             <p>{}</p>
-        </div>)
+            </div>)
+           /* </Card>
+        </div>)*/
     };
 
     getDocFinancialInfo = docId => {
@@ -133,4 +138,5 @@ class FindNeighbor extends Component {
         );
     }
 }
+
 export default FindNeighbor;
