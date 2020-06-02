@@ -13,7 +13,7 @@ class FindNeighbor extends Component {
             peoplesWhoFitCriteria: [{}],
             checkUser: true
 
-        }
+        };
 
         this.filterRequest = this.filterRequest.bind(this);
         this.userBlock=this.userBlock.bind(this);
@@ -22,11 +22,10 @@ class FindNeighbor extends Component {
 
 
     userBlock = () =>  {
-
         return(<div className="userBlock">
             <p>{}</p>
         </div>)
-    }
+    };
 
     getDocFinancialInfo = docId => {
         this.setState({ peoplesList: docId});
@@ -75,22 +74,22 @@ class FindNeighbor extends Component {
         this.setState({
             fullAddress: !this.state.fullAddress
         });
-    }
+    };
     toggleChangeSex = () => {
         this.setState({
             sex: !this.state.sex
         });
-    }
+    };
 
     toggleChangeAge = () => {
         this.setState({
             age: !this.state.age
         });
-    }
+    };
 
     render() {
         let name;
-        console.log(this.state.peoplesWhoFitCriteria)
+        console.log(this.state.peoplesWhoFitCriteria);
         if(!this.state.checkUser){
             name = <p>Sorry, you have not filled everything</p>
         }
@@ -102,29 +101,22 @@ class FindNeighbor extends Component {
             }
         }
         return (
-
             <div>
-                <div>
-                    <button className="find-button" onClick={this.checkAllInformationIsAvailable.bind(this)} >
-                        Click to show modal
-                    </button>
-                    <br></br>
-                    <label className="fullAdress">
+                <div className="find-wrap">
+                    <label>
                         <input type="checkbox"
                                checked={this.state.fullAddress}
                                onChange={this.toggleChangeFullAddress}
                         />
                         Full address
                     </label>
-                    <br></br>
                     <label>
                         <input type="checkbox"
                                checked={this.state.sex}
                                onChange={this.toggleChangeSex}
                         />
-                        Sex
+                        Gender
                     </label>
-                    <br></br>
                     <label>
                         <input type="checkbox"
                                checked={this.state.age}
@@ -132,13 +124,13 @@ class FindNeighbor extends Component {
                         />
                         Age
                     </label>
+                    <button className="find-button" onClick={this.checkAllInformationIsAvailable.bind(this)} >
+                        Click to show modal
+                    </button>
                 </div>
                 {name}
             </div>
-
         );
     }
-
-
 }
-export default FindNeighbor
+export default FindNeighbor;
