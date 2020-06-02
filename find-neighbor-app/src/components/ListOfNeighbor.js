@@ -13,11 +13,11 @@ class ListOfNeighbor extends Component {
 
 
     render() {
-        let userPhoto = 'ZFc1a1pXWnBibVZr'
-        const Example = ({ userPhoto }) => <img src={`data:image/jpeg;base64,${userPhoto}`} />
-        console.log(Example)
-        console.log(this.props.peoplesList)
-        console.log(this.state.peoplesList)
+        let userPhoto = 'ZFc1a1pXWnBibVZr';
+        const Example = ({ userPhoto }) => <img src={`data:image/jpeg;base64,${userPhoto}`} />;
+        console.log(Example);
+        console.log(this.props.peoplesList);
+        console.log(this.state.peoplesList);
         // let array = this.props.poeoplesList.filter(value => Object.keys(value).length !== 0);
         return (
             <div>
