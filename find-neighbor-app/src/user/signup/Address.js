@@ -3,6 +3,8 @@ import {addressRequest} from "../../util/APIUtils";
 import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/lib/form/FormItem";
 
+import './AddressStyles.css';
+
 class Address extends Component {
     constructor(props) {
 
@@ -69,7 +71,7 @@ class Address extends Component {
 
     render() {
         return (
-            <div className="filter-container">
+            <div className="address-wrap">
                 <h1 className="page-title">Address</h1>
                 <div className="filter-content">
                     <Form onSubmit={this.handleSubmit} className="filter-form">
