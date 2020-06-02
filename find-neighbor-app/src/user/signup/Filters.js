@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {additionalInfo, filterRequest, signup} from "../../util/APIUtils";
 import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/lib/form/FormItem";
+import './Filters.css';
 
 class Filters extends Component {
     constructor(props) {
@@ -16,8 +17,7 @@ class Filters extends Component {
             startPrice: '',
             endPrice: '',
             userId: this.props.match.params
-
-        }
+        };
 
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChangeBadHabits = this.handleChangeBadHabits.bind(this);
@@ -168,13 +168,14 @@ class Filters extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <p>Here you can set your preferences</p>
+            <form onSubmit={this.handleSubmit} className="filters-wrap">
+                <h2 className="center">Here you can set your preferences</h2>
                 <FormItem
+                    className="center filters-container"
                     hasFeedback
                     validateStatus={this.state.validateStatus}
                     help={this.state.errorMsg}>
-                    <p>Please set your target age</p>
+                    <h4>Please set your target age</h4>
                     From <Input
                         size="small"
                         name="startAge"
@@ -193,8 +194,8 @@ class Filters extends Component {
                     onChange={(event) =>
                         this.handleInputChange(event, this.validateEndAge)} />
                 </FormItem>
-                <FormItem>
-                    <p>Please set the desired price for the apartment</p>
+                <FormItem className="center filters-container">
+                    <h4 className="center">Please set the desired price for the apartment</h4>
                     From <Input
                     size="small"
                     name="startPrice"
@@ -210,132 +211,128 @@ class Filters extends Component {
                     onChange={
                         this.handleEndPrice} />
                 </FormItem>
-                <FormItem>
-                    <p>Sex of your future neighbor: is it important for you?</p>
-
-                    <ul>
+                <FormItem className="center filters-container">
+                    <h4>Gender of your future neighbor: is it important for you?</h4>
+                    <ul className="filters-list">
                         <li>
                             <label>
+                                <p>Yes, I want to live with a man</p>
                                 <input
                                     type="radio"
                                     value="man"
                                     checked={this.state.sex === "man"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Yes, I want to live with a man
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>Yes, I want to live with a woman</p>
                                 <input
                                     type="radio"
                                     value="woman"
                                     checked={this.state.sex === "woman"}
                                     onChange={this.handleChangeSex}
                                 />
-                                Yes, I want to live with a woman
                             </label>
                         </li>
-
                         <li>
                             <label>
+                                <p>No difference</p>
                                 <input
                                     type="radio"
                                     value="-"
                                     checked={this.state.sex === "-"}
                                     onChange={this.handleChangeSex}
                                 />
-                                No difference
                             </label>
                         </li>
                     </ul>
                 </FormItem>
-                <FormItem>
-                    <p>How about pets?</p>
-                    <ul>
+                <FormItem className="center filters-container">
+                    <h4>How about pets?</h4>
+                    <ul className="filters-list">
                         <li>
                             <label>
+                                <p>Yes</p>
                                 <input
                                     type="radio"
                                     value="yes"
                                     checked={this.state.pets === "yes"}
                                     onChange={this.handleChangePets}
                                 />
-                                Yes
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>No</p>
                                 <input
                                     type="radio"
                                     value="no"
                                     checked={this.state.pets === "no"}
                                     onChange={this.handleChangePets}
                                 />
-                                No
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>I Don`t know</p>
                                 <input
                                     type="radio"
                                     value="-"
                                     checked={this.state.pets === "-"}
                                     onChange={this.handleChangePets}
                                 />
-                                Don`t know
                             </label>
                         </li>
                     </ul>
                 </FormItem>
 
-                <FormItem>
-                    <p>Are you against bad habits?</p>
-                    <ul>
+                <FormItem className="center filters-container">
+                    <h4>Are you against bad habits?</h4>
+                    <ul className="filters-list">
                         <li>
                             <label>
+                                <p>Yes</p>
                                 <input
                                     type="radio"
                                     value="yes"
                                     checked={this.state.badHabits === "yes"}
                                     onChange={this.handleChangeBadHabits}
                                 />
-                                Yes
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>No</p>
                                 <input
                                     type="radio"
                                     value="no"
                                     checked={this.state.badHabits === "no"}
                                     onChange={this.handleChangeBadHabits}
                                 />
-                                No
                             </label>
                         </li>
 
                         <li>
                             <label>
+                                <p>Don`t know</p>
                                 <input
                                     type="radio"
                                     value="-"
                                     checked={this.state.badHabits === "-"}
                                     onChange={this.handleChangeBadHabits}
                                 />
-                                Don`t know
                             </label>
                         </li>
                     </ul>
                 </FormItem>
 
-
-
-                <button type="submit">Ok</button>
+                <button className="filters-form-button" type="submit">Ok</button>
             </form>
 
         );

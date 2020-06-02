@@ -1,4 +1,4 @@
-.info-wrap{
+.filters-wrap{
     bottom: 12rem;
     max-width: 700px;
     border-radius: 20px;
@@ -13,22 +13,17 @@
     text-align: center;
 }
 
-.calendar {
-    text-align: center;
-    margin: auto;
-}
-
-.checkbox-container{
+.filters-container{
     margin-top: 50px;
 }
 
-.checkbox-list {
+.filters-list {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
 }
 
-.checkbox-form-button {
+.filters-form-button {
     width: 100%;
     padding: 10px 0;
     margin-top: 30px;
@@ -40,7 +35,7 @@
     font-size: 20px;
     color: white;
 }
-.checkbox-form-button:hover {
+.filters-form-button:hover {
     cursor: pointer;
     background: #ea1f13;
     color: white;
